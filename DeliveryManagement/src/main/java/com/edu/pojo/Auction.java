@@ -3,29 +3,39 @@ package com.edu.pojo;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "auction")
 public class Auction implements Serializable {
-    private int orderId;
-    private int shipperId;
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+    
     private BigDecimal price;
 
-    public int getOrderId() {
-        return orderId;
+    @ManyToOne
+    @JoinColumn(name = "shipper_id")
+    private Shipper shipper;
+
+    @ManyToOne()
+    @JoinColumn(name = "order_id")
+    private Order order;
+
+    // Getter & setter
+
+    public int getId() {
+        return id;
     }
 
-    public void setOrderId(int orderId) {
-        this.orderId = orderId;
-    }
-
-    public int getShipperId() {
-        return shipperId;
-    }
-
-    public void setShipperId(int shipperId) {
-        this.shipperId = shipperId;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public BigDecimal getPrice() {
@@ -35,4 +45,21 @@ public class Auction implements Serializable {
     public void setPrice(BigDecimal price) {
         this.price = price;
     }
+
+    public Shipper getShipper() {
+        return shipper;
+    }
+
+    public void setShipper(Shipper shipper) {
+        this.shipper = shipper;
+    }
+
+    public Order getOrder() {
+        return order;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
+    }
+    
 }
