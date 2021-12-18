@@ -13,6 +13,8 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 // Extends lại web security có sẵn
@@ -25,9 +27,25 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 })
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    // Biến user được dùng để xác thực, sử dụng ở
+    // Biến user được dùng để xác thực, tên này được khai báo giống với ở UserServiceImpl
     @Autowired
     private UserDetailsService userDetailsService;
+    @Autowired
+    private AuthenticationSuccessHandler loginSuccessHandler;
+    @Autowired
+    private LogoutSuccessHandler logoutSuccessHandler;
+    
+    @Bean
+    public AuthenticationSuccessHandler loginSuccessHandler() {
+        // Tạo đối tượng bằng bean trỏ đến handler của mình
+        return new LoginSuccessfulHandler();
+    }
+    
+    @Bean
+    public LogoutSuccessHandler logoutSuccessHandler() {
+        // Tạo đối tượng bằng bean trỏ đến handler của mình
+        return new LogoutSuccessfulHandler();
+    }
     
     // Cách thức mã hóa mật khẩu trước khi ghi vào csdl
     @Bean
@@ -58,18 +76,32 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     // Phân quyền truy cập
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        // Liên kết form login của mình vào spring security
         http.formLogin().loginPage("/login")
                 .usernameParameter("username")
                 .passwordParameter("password");
+        
+        // Nếu đăng nhập thành công hoặc thất bại thì redirect đến url
         http.formLogin().defaultSuccessUrl("/").failureUrl("/login?error");
-        http.logout().logoutSuccessUrl("/login");
+        
+        // Khi đăng nhập thành công thì nó sẽ gọi phương thức tùy chỉnh (lưu user data vào session)
+        http.formLogin().successHandler(this.loginSuccessHandler);
+        
+//        http.logout().logoutSuccessUrl("/login");
+        // Xóa user data ra khỏi session khi đăng xuất
+        http.logout().logoutSuccessHandler(this.logoutSuccessHandler);
+        
         // Khi không có quyền sẽ trả ra cái cờ
         http.exceptionHandling().accessDeniedPage("/login?accessDenied");
-        // Đăng nhập thành công bắt đầu phân quyền
+        
+        // Đăng nhập thành công bắt đầu phân quyền các endpoint với các quyền tương ứng
         http.authorizeRequests()
                 .antMatchers("/").permitAll()
-                .antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')");
-        // Khi gửi form nó tự bật để tránh bị chèn mã độc
+                .antMatchers("/admin/**").access("hasRole('admin')")
+                .antMatchers("/shipper/**").access("hasRole('shipper')")
+                .antMatchers("/customer/**").access("hasRole('customer')");
+        
+        // Khi gửi form nó tự bật để tránh bị chèn mã độc, tắt để chạy chương trình
         http.csrf().disable();
     }
 }
