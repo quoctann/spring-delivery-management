@@ -27,7 +27,7 @@ import org.springframework.web.servlet.view.JstlView;
     "com.edu.controller",
     "com.edu.repository",
     "com.edu.service",
-    "com.edu.validator"
+//    "com.edu.validator"
 })
 public class WebApplicationContextConfig implements WebMvcConfigurer {
 
@@ -49,16 +49,16 @@ public class WebApplicationContextConfig implements WebMvcConfigurer {
     }
 
     // Thêm, khai báo formatter dữ liệu
-    @Override
-    public void addFormatters(FormatterRegistry registry) {
-        //registry.addFormatter(new YourFormatter());
-    }
+//    @Override
+//    public void addFormatters(FormatterRegistry registry) {
+//        //registry.addFormatter(new YourFormatter());
+//    }
 
     // Sử dụng validator
-    @Override
-    public Validator getValidator() {
-        return WebMvcConfigurer.super.getValidator(); //To change body of generated methods, choose Tools | Templates.
-    }
+//    @Override
+//    public Validator getValidator() {
+//        return WebMvcConfigurer.super.getValidator(); //To change body of generated methods, choose Tools | Templates.
+//    }
 
     // Cấu hình validator của lớp product
 //    @Bean
@@ -70,12 +70,12 @@ public class WebApplicationContextConfig implements WebMvcConfigurer {
 //        return v;
 //    }
     // Cấu hình bean validator, message trả ra đọc từ file properties
-    @Bean
-    public LocalValidatorFactoryBean validator() {
-        LocalValidatorFactoryBean v = new LocalValidatorFactoryBean();
-        v.setValidationMessageSource(messageSource());
-        return v;
-    }
+//    @Bean
+//    public LocalValidatorFactoryBean validator() {
+//        LocalValidatorFactoryBean v = new LocalValidatorFactoryBean();
+//        v.setValidationMessageSource(messageSource());
+//        return v;
+//    }
 
     // Cấu hình đọc message từ file properties
     @Bean

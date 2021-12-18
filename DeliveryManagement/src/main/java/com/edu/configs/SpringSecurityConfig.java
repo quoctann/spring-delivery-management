@@ -28,13 +28,25 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     // Biến user được dùng để xác thực, sử dụng ở
     @Autowired
     private UserDetailsService userDetailsService;
-
+    
     // Cách thức mã hóa mật khẩu trước khi ghi vào csdl
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
+    
+    // Nạp cloudinary luôn để scan không bị lỗi
+    @Bean
+    public Cloudinary cloudinary() {
+        Cloudinary c = new Cloudinary(ObjectUtils.asMap(
+            "cloud_name", "open-edu",
+            "api_key", "146256471874449",
+            "api_secret", "DngyGbiJtXwvStyV7r_pbfa8St8",
+            "secure", true    
+        ));
+        return c;
+    }
+    
     // Chứng thực
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -59,16 +71,5 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')");
         // Khi gửi form nó tự bật để tránh bị chèn mã độc
         http.csrf().disable();
-    }
-    
-    @Bean
-    public Cloudinary cloudinary() {
-        Cloudinary c = new Cloudinary(ObjectUtils.asMap(
-            "cloud_name", "open-edu",
-            "api_key", "146256471874449",
-            "api_secret", "DngyGbiJtXwvStyV7r_pbfa8St8",
-            "secure", true    
-        ));
-        return c;
     }
 }
