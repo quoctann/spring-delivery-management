@@ -14,9 +14,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -44,7 +46,11 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "User.findByJoinedDate", query = "SELECT u FROM User u WHERE u.joinedDate = :joinedDate"),
     @NamedQuery(name = "User.findByActive", query = "SELECT u FROM User u WHERE u.active = :active")})
 public class User implements Serializable {
-
+    
+    private static final String USER_ROLE = "user";
+    private static final String ADMIN_ROLE = "admin";
+    private static final String SHIPPER_ROLE = "shipper";
+    
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -90,12 +96,26 @@ public class User implements Serializable {
     @NotNull
     @Column(name = "active")
     private short active;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-    private Collection<Shipper> shipperCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-    private Collection<SysAdmin> sysAdminCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-    private Collection<Customer> customerCollection;
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+//    private Collection<Shipper> shipperCollection;
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+//    private Collection<SysAdmin> sysAdminCollection;
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+//    private Collection<Customer> customerCollection;
+//    @OneToOne
+//    @JoinColumn(name = "shipper_id")
+//    private Shipper shipper;
+//    @OneToOne
+//    @JoinColumn(name = "customer_id")
+//    private Customer customer;
+//    @OneToOne
+//    @JoinColumn(name = "admin_id")
+//    private SysAdmin sysAdmin;
+    
+    @Column(name = "user_role")
+    @NotNull
+    @Size(min = 1, max = 45)
+    private String userRole;
 
     public User() {
     }
@@ -187,32 +207,66 @@ public class User implements Serializable {
         this.active = active;
     }
 
-    @XmlTransient
-    public Collection<Shipper> getShipperCollection() {
-        return shipperCollection;
+    public String getUserRole() {
+        return userRole;
     }
 
-    public void setShipperCollection(Collection<Shipper> shipperCollection) {
-        this.shipperCollection = shipperCollection;
+    public void setUserRole(String userRole) {
+        this.userRole = userRole;
     }
 
-    @XmlTransient
-    public Collection<SysAdmin> getSysAdminCollection() {
-        return sysAdminCollection;
-    }
-
-    public void setSysAdminCollection(Collection<SysAdmin> sysAdminCollection) {
-        this.sysAdminCollection = sysAdminCollection;
-    }
-
-    @XmlTransient
-    public Collection<Customer> getCustomerCollection() {
-        return customerCollection;
-    }
-
-    public void setCustomerCollection(Collection<Customer> customerCollection) {
-        this.customerCollection = customerCollection;
-    }
+//    public Shipper getShipper() {
+//        return shipper;
+//    }
+//
+//    public void setShipper(Shipper shipper) {
+//        this.shipper = shipper;
+//    }
+//
+//    public Customer getCustomer() {
+//        return customer;
+//    }
+//
+//    public void setCustomer(Customer customer) {
+//        this.customer = customer;
+//    }
+//
+//    public SysAdmin getSysAdmin() {
+//        return sysAdmin;
+//    }
+//
+//    public void setSysAdmin(SysAdmin sysAdmin) {
+//        this.sysAdmin = sysAdmin;
+//    }
+    
+    
+    
+//    @XmlTransient
+//    public Collection<Shipper> getShipperCollection() {
+//        return shipperCollection;
+//    }
+//
+//    public void setShipperCollection(Collection<Shipper> shipperCollection) {
+//        this.shipperCollection = shipperCollection;
+//    }
+//
+//    @XmlTransient
+//    public Collection<SysAdmin> getSysAdminCollection() {
+//        return sysAdminCollection;
+//    }
+//
+//    public void setSysAdminCollection(Collection<SysAdmin> sysAdminCollection) {
+//        this.sysAdminCollection = sysAdminCollection;
+//    }
+//
+//    @XmlTransient
+//    public Collection<Customer> getCustomerCollection() {
+//        return customerCollection;
+//    }
+//
+//    public void setCustomerCollection(Collection<Customer> customerCollection) {
+//        this.customerCollection = customerCollection;
+//    }
 
     @Override
     public int hashCode() {
