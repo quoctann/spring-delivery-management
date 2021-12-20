@@ -23,6 +23,5 @@ public class LoginSuccessfulHandler implements AuthenticationSuccessHandler {
         // Lưu dữ liệu vào session
         request.getSession().setAttribute("currentUser", u);
         response.sendRedirect("/DeliveryManagement");
-    }
-    
+    }  
 }

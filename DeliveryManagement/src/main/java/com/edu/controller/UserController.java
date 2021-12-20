@@ -21,5 +21,8 @@ public class UserController {
     public String signUp() {
         return "signup";
     }
-    
+    @GetMapping("profile")
+    public String profile() {
+        return "profile";
+    }
 }
