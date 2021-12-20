@@ -1,13 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.edu.pojo;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.Set;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -17,16 +12,13 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
-/**
- *
- * @author quoctan
- */
 @Entity
 @Table(name = "customer")
 @XmlRootElement
@@ -38,43 +30,35 @@ import javax.xml.bind.annotation.XmlTransient;
 public class Customer implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    
     @Id
     @Basic(optional = false)
     @NotNull
     @Column(name = "customer_id")
     private Integer customerId;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 150)
+    
+    @Size(max = 255)
     @Column(name = "address")
     private String address;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 20)
+    
+    @Size(max = 50)
     @Column(name = "id_card")
     private String idCard;
-    @JoinColumns({
-        @JoinColumn(name = "customer_id", referencedColumnName = "id", insertable = false, updatable = false),
-        @JoinColumn(name = "customer_id", referencedColumnName = "id", insertable = false, updatable = false),
-        @JoinColumn(name = "customer_id", referencedColumnName = "id", insertable = false, updatable = false),
-        @JoinColumn(name = "customer_id", referencedColumnName = "id", insertable = false, updatable = false),
-        @JoinColumn(name = "customer_id", referencedColumnName = "id", insertable = false, updatable = false)})
-    @ManyToOne(optional = false)
+    
+    @OneToMany(mappedBy = "customerId")
+    private Set<Comment> commentSet;
+    
+    @OneToOne(mappedBy = "customer")
     private User user;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "customerId")
-    private Collection<Order> order1Collection;
+    
+    @OneToMany(mappedBy = "customerId")
+    private Set<Order> orderSet;
 
     public Customer() {
     }
 
     public Customer(Integer customerId) {
         this.customerId = customerId;
-    }
-
-    public Customer(Integer customerId, String address, String idCard) {
-        this.customerId = customerId;
-        this.address = address;
-        this.idCard = idCard;
     }
 
     public Integer getCustomerId() {
@@ -101,6 +85,15 @@ public class Customer implements Serializable {
         this.idCard = idCard;
     }
 
+    @XmlTransient
+    public Set<Comment> getCommentSet() {
+        return commentSet;
+    }
+
+    public void setCommentSet(Set<Comment> commentSet) {
+        this.commentSet = commentSet;
+    }
+
     public User getUser() {
         return user;
     }
@@ -110,12 +103,12 @@ public class Customer implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Order> getOrder1Collection() {
-        return order1Collection;
+    public Set<Order> getOrderSet() {
+        return orderSet;
     }
 
-    public void setOrder1Collection(Collection<Order> order1Collection) {
-        this.order1Collection = order1Collection;
+    public void setOrderSet(Set<Order> orderSet) {
+        this.orderSet = orderSet;
     }
 
     @Override

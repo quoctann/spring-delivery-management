@@ -1,21 +1,15 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.edu.pojo;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Date;
+import java.util.Set;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -23,120 +17,97 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
-/**
- *
- * @author quoctan
- */
 @Entity
 @Table(name = "order")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Order1.findAll", query = "SELECT o FROM Order1 o"),
-    @NamedQuery(name = "Order1.findById", query = "SELECT o FROM Order1 o WHERE o.id = :id"),
-    @NamedQuery(name = "Order1.findByIssueDate", query = "SELECT o FROM Order1 o WHERE o.issueDate = :issueDate"),
-    @NamedQuery(name = "Order1.findByEndDate", query = "SELECT o FROM Order1 o WHERE o.endDate = :endDate"),
-    @NamedQuery(name = "Order1.findByStatus", query = "SELECT o FROM Order1 o WHERE o.status = :status"),
-    @NamedQuery(name = "Order1.findByDescription", query = "SELECT o FROM Order1 o WHERE o.description = :description"),
-    @NamedQuery(name = "Order1.findBySentFrom", query = "SELECT o FROM Order1 o WHERE o.sentFrom = :sentFrom"),
-    @NamedQuery(name = "Order1.findBySentTo", query = "SELECT o FROM Order1 o WHERE o.sentTo = :sentTo"),
-    @NamedQuery(name = "Order1.findByPaymentMethod", query = "SELECT o FROM Order1 o WHERE o.paymentMethod = :paymentMethod"),
-    @NamedQuery(name = "Order1.findByType", query = "SELECT o FROM Order1 o WHERE o.type = :type"),
-    @NamedQuery(name = "Order1.findByTransactionId", query = "SELECT o FROM Order1 o WHERE o.transactionId = :transactionId")})
+    @NamedQuery(name = "Order.findAll", query = "SELECT o FROM Order o"),
+    @NamedQuery(name = "Order.findById", query = "SELECT o FROM Order o WHERE o.id = :id"),
+    @NamedQuery(name = "Order.findByCreatedDate", query = "SELECT o FROM Order o WHERE o.createdDate = :createdDate"),
+    @NamedQuery(name = "Order.findByCompletedDate", query = "SELECT o FROM Order o WHERE o.completedDate = :completedDate"),
+    @NamedQuery(name = "Order.findByStatus", query = "SELECT o FROM Order o WHERE o.status = :status"),
+    @NamedQuery(name = "Order.findByDescription", query = "SELECT o FROM Order o WHERE o.description = :description"),
+    @NamedQuery(name = "Order.findByReceiverPhone", query = "SELECT o FROM Order o WHERE o.receiverPhone = :receiverPhone"),
+    @NamedQuery(name = "Order.findBySentFrom", query = "SELECT o FROM Order o WHERE o.sentFrom = :sentFrom"),
+    @NamedQuery(name = "Order.findBySentTo", query = "SELECT o FROM Order o WHERE o.sentTo = :sentTo"),
+    @NamedQuery(name = "Order.findByPaymentMethod", query = "SELECT o FROM Order o WHERE o.paymentMethod = :paymentMethod"),
+    @NamedQuery(name = "Order.findByType", query = "SELECT o FROM Order o WHERE o.type = :type"),
+    @NamedQuery(name = "Order.findByTransactionId", query = "SELECT o FROM Order o WHERE o.transactionId = :transactionId"),
+    @NamedQuery(name = "Order.findByRateStar", query = "SELECT o FROM Order o WHERE o.rateStar = :rateStar")})
 public class Order implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "id")
     private Integer id;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "issue_date")
+    
+    @Column(name = "created_date")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date issueDate;
-    @Column(name = "end_date")
+    private Date createdDate;
+    
+    @Column(name = "completed_date")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date endDate;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 10)
+    private Date completedDate;
+    
+    @Size(max = 50)
     @Column(name = "status")
     private String status;
-    @Size(max = 100)
+    
+    @Size(max = 255)
     @Column(name = "description")
     private String description;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 255)
+    
+    @Size(max = 15)
+    @Column(name = "receiver_phone")
+    private String receiverPhone;
+    
+    @Size(max = 255)
     @Column(name = "sent_from")
     private String sentFrom;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 255)
+    
+    @Size(max = 255)
     @Column(name = "sent_to")
     private String sentTo;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 10)
+    
+    @Size(max = 45)
     @Column(name = "payment_method")
     private String paymentMethod;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 10)
+    
+    @Size(max = 45)
     @Column(name = "type")
     private String type;
-    @Size(max = 50)
+    
+    @Size(max = 100)
     @Column(name = "transaction_id")
     private String transactionId;
-    @JoinTable(name = "auction", joinColumns = {
-        @JoinColumn(name = "order_id", referencedColumnName = "id"),
-        @JoinColumn(name = "order_id", referencedColumnName = "id")}, inverseJoinColumns = {
-        @JoinColumn(name = "shipper_id", referencedColumnName = "shipper_id"),
-        @JoinColumn(name = "shipper_id", referencedColumnName = "shipper_id"),
-        @JoinColumn(name = "shipper_id", referencedColumnName = "shipper_id")})
-    @ManyToMany
-    private Collection<Shipper> shipperCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "order1")
-    private Collection<ReportedOrder> reportedOrderCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "order1")
-    private Collection<Review> reviewCollection;
+    
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Column(name = "rate_star")
+    private Float rateStar;
+    
+    @OneToMany(mappedBy = "orderId")
+    private Set<Auction> auctionSet;
+    
     @JoinColumn(name = "customer_id", referencedColumnName = "customer_id")
-    @ManyToOne(optional = false)
+    @ManyToOne
     private Customer customerId;
-    @JoinColumns({
-        @JoinColumn(name = "promo_id", referencedColumnName = "id"),
-        @JoinColumn(name = "promo_id", referencedColumnName = "id"),
-        @JoinColumn(name = "promo_id", referencedColumnName = "id")})
+    
+    @JoinColumn(name = "shipper_id", referencedColumnName = "shipper_id")
     @ManyToOne
-    private Promotion promotion;
-    @JoinColumns({
-        @JoinColumn(name = "shipper_id", referencedColumnName = "shipper_id"),
-        @JoinColumn(name = "shipper_id", referencedColumnName = "shipper_id"),
-        @JoinColumn(name = "shipper_id", referencedColumnName = "shipper_id")})
-    @ManyToOne
-    private Shipper shipper;
+    private Shipper shipperId;
 
     public Order() {
     }
 
     public Order(Integer id) {
         this.id = id;
-    }
-
-    public Order(Integer id, Date issueDate, String status, String sentFrom, String sentTo, String paymentMethod, String type) {
-        this.id = id;
-        this.issueDate = issueDate;
-        this.status = status;
-        this.sentFrom = sentFrom;
-        this.sentTo = sentTo;
-        this.paymentMethod = paymentMethod;
-        this.type = type;
     }
 
     public Integer getId() {
@@ -147,20 +118,20 @@ public class Order implements Serializable {
         this.id = id;
     }
 
-    public Date getIssueDate() {
-        return issueDate;
+    public Date getCreatedDate() {
+        return createdDate;
     }
 
-    public void setIssueDate(Date issueDate) {
-        this.issueDate = issueDate;
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
     }
 
-    public Date getEndDate() {
-        return endDate;
+    public Date getCompletedDate() {
+        return completedDate;
     }
 
-    public void setEndDate(Date endDate) {
-        this.endDate = endDate;
+    public void setCompletedDate(Date completedDate) {
+        this.completedDate = completedDate;
     }
 
     public String getStatus() {
@@ -177,6 +148,14 @@ public class Order implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getReceiverPhone() {
+        return receiverPhone;
+    }
+
+    public void setReceiverPhone(String receiverPhone) {
+        this.receiverPhone = receiverPhone;
     }
 
     public String getSentFrom() {
@@ -219,31 +198,21 @@ public class Order implements Serializable {
         this.transactionId = transactionId;
     }
 
-    @XmlTransient
-    public Collection<Shipper> getShipperCollection() {
-        return shipperCollection;
+    public Float getRateStar() {
+        return rateStar;
     }
 
-    public void setShipperCollection(Collection<Shipper> shipperCollection) {
-        this.shipperCollection = shipperCollection;
-    }
-
-    @XmlTransient
-    public Collection<ReportedOrder> getReportedOrderCollection() {
-        return reportedOrderCollection;
-    }
-
-    public void setReportedOrderCollection(Collection<ReportedOrder> reportedOrderCollection) {
-        this.reportedOrderCollection = reportedOrderCollection;
+    public void setRateStar(Float rateStar) {
+        this.rateStar = rateStar;
     }
 
     @XmlTransient
-    public Collection<Review> getReviewCollection() {
-        return reviewCollection;
+    public Set<Auction> getAuctionSet() {
+        return auctionSet;
     }
 
-    public void setReviewCollection(Collection<Review> reviewCollection) {
-        this.reviewCollection = reviewCollection;
+    public void setAuctionSet(Set<Auction> auctionSet) {
+        this.auctionSet = auctionSet;
     }
 
     public Customer getCustomerId() {
@@ -254,20 +223,12 @@ public class Order implements Serializable {
         this.customerId = customerId;
     }
 
-    public Promotion getPromotion() {
-        return promotion;
+    public Shipper getShipperId() {
+        return shipperId;
     }
 
-    public void setPromotion(Promotion promotion) {
-        this.promotion = promotion;
-    }
-
-    public Shipper getShipper() {
-        return shipper;
-    }
-
-    public void setShipper(Shipper shipper) {
-        this.shipper = shipper;
+    public void setShipperId(Shipper shipperId) {
+        this.shipperId = shipperId;
     }
 
     @Override

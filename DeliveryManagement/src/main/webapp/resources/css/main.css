@@ -206,6 +206,41 @@ ul > li {
   right: 5%;
 }
 
+.rate {
+  margin-bottom: 8px;
+}
+
+.rate .fa.active {
+  color: #ffb74d;
+}
+
+.search-bar input:focus {
+  outline: none;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+.search-bar button {
+  border: none;
+}
+
+.sort select {
+  font-weight: bold;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  border: none;
+  width: 15%;
+  padding: 0 8px;
+  cursor: pointer;
+}
+
+.sort select:focus {
+  outline: none;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
 .btnSignIn {
   padding: 7px 16px;
   margin: 8px;
@@ -864,5 +899,52 @@ ul > li {
 
 #profile .order-list span {
   float: right;
+}
+
+#profile .cmt-input {
+  margin-bottom: 48px;
+}
+
+#profile .cmt-input textarea {
+  padding: 8px 16px;
+}
+
+#profile .current-user-avatar {
+  width: 80px;
+  height: 55px;
+}
+
+#profile .current-user-avatar img {
+  border: 2px solid #388e3c;
+  border-radius: 50%;
+}
+
+#profile .comment-box {
+  margin-left: 48px;
+}
+
+#profile .comment-item {
+  background-color: #e0e0e0;
+  margin: 8px;
+  padding: 16px 24px;
+  border-radius: 5px;
+}
+
+#profile .comment-content span {
+  float: right;
+  font-size: small;
+  font-style: italic;
+}
+
+#shipper-list .list-item {
+  margin-bottom: 24px;
+}
+
+#auction td, #auction th {
+  vertical-align: middle;
+}
+
+#auction form {
+  text-align: center;
 }
 /*# sourceMappingURL=main.css.map */

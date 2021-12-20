@@ -10,6 +10,9 @@
     <class>com.edu.pojo.Promotion</class>
     <class>com.edu.pojo.Customer</class>
     <class>com.edu.pojo.Order</class>
+    <class>com.edu.pojo.Admin</class>
+    <class>com.edu.pojo.Comment</class>
+    <class>com.edu.pojo.Auction</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/delivery_management?zeroDateTimeBehavior=CONVERT_TO_NULL"/>

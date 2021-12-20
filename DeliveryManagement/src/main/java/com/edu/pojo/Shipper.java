@@ -1,91 +1,70 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.edu.pojo;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.Set;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
-/**
- *
- * @author quoctan
- */
 @Entity
 @Table(name = "shipper")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Shipper.findAll", query = "SELECT s FROM Shipper s"),
     @NamedQuery(name = "Shipper.findByShipperId", query = "SELECT s FROM Shipper s WHERE s.shipperId = :shipperId"),
-    @NamedQuery(name = "Shipper.findByAvatar", query = "SELECT s FROM Shipper s WHERE s.avatar = :avatar"),
     @NamedQuery(name = "Shipper.findByIdCard", query = "SELECT s FROM Shipper s WHERE s.idCard = :idCard"),
     @NamedQuery(name = "Shipper.findByAvgRating", query = "SELECT s FROM Shipper s WHERE s.avgRating = :avgRating")})
 public class Shipper implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    
     @Id
     @Basic(optional = false)
     @NotNull
     @Column(name = "shipper_id")
     private Integer shipperId;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 100)
-    @Column(name = "avatar")
-    private String avatar;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 20)
+    
+    @Size(max = 50)
     @Column(name = "id_card")
     private String idCard;
-    @Basic(optional = false)
-    @NotNull
+    
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "avg_rating")
-    private float avgRating;
-    @ManyToMany(mappedBy = "shipperCollection")
-    private Collection<Order> order1Collection;
+    private Float avgRating;
+    
     @JoinColumn(name = "approved_by", referencedColumnName = "admin_id")
     @ManyToOne
-    private SysAdmin approvedBy;
-    @JoinColumns({
-        @JoinColumn(name = "shipper_id", referencedColumnName = "id", insertable = false, updatable = false),
-        @JoinColumn(name = "shipper_id", referencedColumnName = "id", insertable = false, updatable = false),
-        @JoinColumn(name = "shipper_id", referencedColumnName = "id", insertable = false, updatable = false),
-        @JoinColumn(name = "shipper_id", referencedColumnName = "id", insertable = false, updatable = false),
-        @JoinColumn(name = "shipper_id", referencedColumnName = "id", insertable = false, updatable = false)})
-    @ManyToOne(optional = false)
+    private Admin approvedBy;
+    
+    @OneToOne(mappedBy = "shipper")
     private User user;
-    @OneToMany(mappedBy = "shipper")
-    private Collection<Order> order1Collection1;
+    
+    @OneToMany(mappedBy = "shipperId")
+    private Set<Comment> commentSet;
+    
+    @OneToMany(mappedBy = "shipperId")
+    private Set<Auction> auctionSet;
+    
+    @OneToMany(mappedBy = "shipperId")
+    private Set<Order> orderSet;
 
     public Shipper() {
     }
 
     public Shipper(Integer shipperId) {
         this.shipperId = shipperId;
-    }
-
-    public Shipper(Integer shipperId, String avatar, String idCard, float avgRating) {
-        this.shipperId = shipperId;
-        this.avatar = avatar;
-        this.idCard = idCard;
-        this.avgRating = avgRating;
     }
 
     public Integer getShipperId() {
@@ -96,14 +75,6 @@ public class Shipper implements Serializable {
         this.shipperId = shipperId;
     }
 
-    public String getAvatar() {
-        return avatar;
-    }
-
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
-    }
-
     public String getIdCard() {
         return idCard;
     }
@@ -112,28 +83,19 @@ public class Shipper implements Serializable {
         this.idCard = idCard;
     }
 
-    public float getAvgRating() {
+    public Float getAvgRating() {
         return avgRating;
     }
 
-    public void setAvgRating(float avgRating) {
+    public void setAvgRating(Float avgRating) {
         this.avgRating = avgRating;
     }
 
-    @XmlTransient
-    public Collection<Order> getOrder1Collection() {
-        return order1Collection;
-    }
-
-    public void setOrder1Collection(Collection<Order> order1Collection) {
-        this.order1Collection = order1Collection;
-    }
-
-    public SysAdmin getApprovedBy() {
+    public Admin getApprovedBy() {
         return approvedBy;
     }
 
-    public void setApprovedBy(SysAdmin approvedBy) {
+    public void setApprovedBy(Admin approvedBy) {
         this.approvedBy = approvedBy;
     }
 
@@ -146,12 +108,30 @@ public class Shipper implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Order> getOrder1Collection1() {
-        return order1Collection1;
+    public Set<Comment> getCommentSet() {
+        return commentSet;
     }
 
-    public void setOrder1Collection1(Collection<Order> order1Collection1) {
-        this.order1Collection1 = order1Collection1;
+    public void setCommentSet(Set<Comment> commentSet) {
+        this.commentSet = commentSet;
+    }
+
+    @XmlTransient
+    public Set<Auction> getAuctionSet() {
+        return auctionSet;
+    }
+
+    public void setAuctionSet(Set<Auction> auctionSet) {
+        this.auctionSet = auctionSet;
+    }
+
+    @XmlTransient
+    public Set<Order> getOrderSet() {
+        return orderSet;
+    }
+
+    public void setOrderSet(Set<Order> orderSet) {
+        this.orderSet = orderSet;
     }
 
     @Override
