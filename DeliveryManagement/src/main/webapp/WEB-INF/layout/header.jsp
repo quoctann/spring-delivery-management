@@ -46,7 +46,7 @@
                          width="50" height="50" />
                     </c:if>
                     
-                    <div class="account-name">${currentUser.fullname}</div>
+                    <div class="account-name">${currentUser.firstName} ${currentUser.lastName}</div>
                 </div>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
                     <li><a class="dropdown-item" href="#">Thông tin tài khoản</a></li>

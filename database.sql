@@ -119,6 +119,7 @@ CREATE TABLE `customer` (
 
 LOCK TABLES `customer` WRITE;
 /*!40000 ALTER TABLE `customer` DISABLE KEYS */;
+INSERT INTO `customer` VALUES (7,NULL,NULL),(10,NULL,NULL);
 /*!40000 ALTER TABLE `customer` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -171,7 +172,6 @@ DROP TABLE IF EXISTS `shipper`;
 CREATE TABLE `shipper` (
   `shipper_id` int NOT NULL,
   `approved_by` int DEFAULT NULL,
-  `avatar` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `id_card` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `avg_rating` float DEFAULT '0',
   PRIMARY KEY (`shipper_id`),
@@ -187,6 +187,7 @@ CREATE TABLE `shipper` (
 
 LOCK TABLES `shipper` WRITE;
 /*!40000 ALTER TABLE `shipper` DISABLE KEYS */;
+INSERT INTO `shipper` VALUES (8,NULL,NULL,NULL),(9,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `shipper` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -201,15 +202,17 @@ CREATE TABLE `user` (
   `id` int NOT NULL AUTO_INCREMENT,
   `username` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `password` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `fullname` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `first_name` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `email` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `phone` varchar(15) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `joined_date` date DEFAULT NULL,
   `active` tinyint NOT NULL DEFAULT '1',
   `user_role` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'customer',
+  `avatar` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `last_name` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -218,7 +221,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'admin','$2a$10$5X9k5N1sTc1/CjVH5XJoje3QMYijH3ETpgkox00R0MdPaJPPrf7wO','Tran Quoc Tan','admin@mail.com','01234567890','2021-01-01',1,'admin'),(2,'customer','$2a$10$5X9k5N1sTc1/CjVH5XJoje3QMYijH3ETpgkox00R0MdPaJPPrf7wO','Quoc Tan','customer@mail.com','01234567899','2021-01-01',1,'customer'),(3,'shipper','$2a$10$5X9k5N1sTc1/CjVH5XJoje3QMYijH3ETpgkox00R0MdPaJPPrf7wO','Tan Tran','shipper@mail.com','01234567898','2021-01-01',1,'shipper');
+INSERT INTO `user` VALUES (1,'admin','$2a$10$5X9k5N1sTc1/CjVH5XJoje3QMYijH3ETpgkox00R0MdPaJPPrf7wO','Tran Quoc Tan','admin@mail.com','01234567890','2021-01-01',1,'admin','https://res.cloudinary.com/open-edu/image/upload/v1629294770/sample.jpg','Tấn'),(2,'customer','$2a$10$5X9k5N1sTc1/CjVH5XJoje3QMYijH3ETpgkox00R0MdPaJPPrf7wO','Quoc Tan','customer@mail.com','01234567899','2021-01-01',1,'customer','https://res.cloudinary.com/open-edu/image/upload/v1629294770/sample.jpg','Tấn'),(3,'shipper','$2a$10$5X9k5N1sTc1/CjVH5XJoje3QMYijH3ETpgkox00R0MdPaJPPrf7wO','Tan Tran','shipper@mail.com','01234567898','2021-01-01',1,'shipper','https://res.cloudinary.com/open-edu/image/upload/v1629294770/sample.jpg','Tấn'),(7,'tantran','$2a$10$frwXswryzgKiCxRcy2tYwuFE74qe0qKyy..ppGtcheMm7K4wEmxsW','Trần','tan@mail.com','0706638940',NULL,1,'customer','https://res.cloudinary.com/open-edu/image/upload/v1639985372/g2xfmsp10a2txawb0dyd.jpg','Tấn'),(8,'ship1','$2a$10$GeGwC3lijS90qTeyKdiAwOGRnhfeYG5wGmewMVPMUcRoEg4BgiGMW','Lê','ship@mail.com','0706638940',NULL,1,'shipper','https://res.cloudinary.com/open-edu/image/upload/v1639986150/hhzr0061dxhnnpa6sijv.jpg','Ship'),(9,'test0','$2a$10$a0sqPGxUQ3ZNjNAtVPSOZ.ONbP9M2taWYMQGsNODuIRZoXSt8bWlW','Test99','test0@mail.com','0706638940','2021-12-20',1,'shipper','https://res.cloudinary.com/open-edu/image/upload/v1639987020/ym8ccwbxngbqyhlhwhoa.jpg','Test99'),(10,'vjp','$2a$10$cf14sE1XtR5kpst301HIk.DacAAVETBk.F5romIi/K46fyQqPrgMy','Trần','181050127tan@ou.edu.vn','0706638940','2021-12-20',1,'customer','https://res.cloudinary.com/open-edu/image/upload/v1640001020/hvne4lq3bz3nufnsexp3.jpg','Tấn');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -231,4 +234,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-12-18 16:50:48
+-- Dump completed on 2021-12-20 19:09:53
