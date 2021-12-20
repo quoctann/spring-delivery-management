@@ -24,7 +24,6 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Shipper.findAll", query = "SELECT s FROM Shipper s"),
     @NamedQuery(name = "Shipper.findByShipperId", query = "SELECT s FROM Shipper s WHERE s.shipperId = :shipperId"),
-    @NamedQuery(name = "Shipper.findByAvatar", query = "SELECT s FROM Shipper s WHERE s.avatar = :avatar"),
     @NamedQuery(name = "Shipper.findByIdCard", query = "SELECT s FROM Shipper s WHERE s.idCard = :idCard"),
     @NamedQuery(name = "Shipper.findByAvgRating", query = "SELECT s FROM Shipper s WHERE s.avgRating = :avgRating")})
 public class Shipper implements Serializable {
@@ -36,10 +35,6 @@ public class Shipper implements Serializable {
     @NotNull
     @Column(name = "shipper_id")
     private Integer shipperId;
-    
-    @Size(max = 100)
-    @Column(name = "avatar")
-    private String avatar;
     
     @Size(max = 50)
     @Column(name = "id_card")
@@ -78,14 +73,6 @@ public class Shipper implements Serializable {
 
     public void setShipperId(Integer shipperId) {
         this.shipperId = shipperId;
-    }
-
-    public String getAvatar() {
-        return avatar;
-    }
-
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
     }
 
     public String getIdCard() {

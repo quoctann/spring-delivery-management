@@ -8,22 +8,26 @@
         <put-attribute name="footer" value="/WEB-INF/layout/footer.jsp"/>
         <put-attribute name="content" value="base"/>
     </definition>
+    
     <!--Kế thừa lại layout mẫu để viết template-->
     <definition name="index" extends="baseLayout">
         <put-attribute name="title" value="Trang chủ" />
         <put-attribute name="content" value="/WEB-INF/jsp/index.jsp" />
     </definition>
-    <!-- Đăng nhập -->
+    
+    <!-- Trang đăng nhập -->
     <definition name="signin" extends="baseLayout">
         <put-attribute name="title" value="Đăng nhập" />
         <put-attribute name="content" value="/WEB-INF/jsp/signin.jsp" />
     </definition>
-    <!-- Đăng Ký -->
+    
+    <!-- Trang đăng ký -->
     <definition name="signup" extends="baseLayout">
         <put-attribute name="title" value="Đăng ký" />
         <put-attribute name="content" value="/WEB-INF/jsp/signup.jsp" />
     </definition>
-    <!-- Đăng nhập -->
+    
+    <!-- Trang thông tin user -->
     <definition name="profile" extends="baseLayout">
         <put-attribute name="title" value="Đăng nhập" />
         <put-attribute name="content" value="/WEB-INF/jsp/profile.jsp" />

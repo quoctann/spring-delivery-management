@@ -88,6 +88,10 @@ public class User implements Serializable {
     @Column(name = "user_role")
     private String userRole;
     
+    @Size(max = 100)
+    @Column(name = "avatar")
+    private String avatar;
+    
     @OneToOne
     @PrimaryKeyJoinColumn
     private Shipper shipper;
@@ -185,6 +189,14 @@ public class User implements Serializable {
 
     public void setUserRole(String userRole) {
         this.userRole = userRole;
+    }
+    
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 
     public Shipper getShipper() {
