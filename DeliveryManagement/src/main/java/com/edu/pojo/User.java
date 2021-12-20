@@ -1,5 +1,6 @@
 package com.edu.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
@@ -15,9 +16,11 @@ import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import org.springframework.web.multipart.MultipartFile;
 
 @Entity
 @Table(name = "user")
@@ -27,7 +30,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "User.findById", query = "SELECT u FROM User u WHERE u.id = :id"),
     @NamedQuery(name = "User.findByUsername", query = "SELECT u FROM User u WHERE u.username = :username"),
     @NamedQuery(name = "User.findByPassword", query = "SELECT u FROM User u WHERE u.password = :password"),
-    @NamedQuery(name = "User.findByFullname", query = "SELECT u FROM User u WHERE u.fullname = :fullname"),
+    @NamedQuery(name = "User.findByFirstName", query = "SELECT u FROM User u WHERE u.firstName = :firstName"),
     @NamedQuery(name = "User.findByEmail", query = "SELECT u FROM User u WHERE u.email = :email"),
     @NamedQuery(name = "User.findByPhone", query = "SELECT u FROM User u WHERE u.phone = :phone"),
     @NamedQuery(name = "User.findByJoinedDate", query = "SELECT u FROM User u WHERE u.joinedDate = :joinedDate"),
@@ -37,9 +40,9 @@ public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
     
-    private static final String ROLE_ADMIN = "admin";
-    private static final String ROLE_CUSTOMER = "customer";
-    private static final String ROLE_SHIPPER = "shipper";
+    public static final String ROLE_ADMIN = "admin";
+    public static final String ROLE_CUSTOMER = "customer";
+    public static final String ROLE_SHIPPER = "shipper";
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -60,8 +63,12 @@ public class User implements Serializable {
     private String password;
     
     @Size(max = 100)
-    @Column(name = "fullname")
-    private String fullname;
+    @Column(name = "first_name")
+    private String firstName;
+    
+    @Size(max = 100)
+    @Column(name = "last_name")
+    private String lastName;
     
     // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
     @Size(max = 50)
@@ -92,6 +99,14 @@ public class User implements Serializable {
     @Column(name = "avatar")
     private String avatar;
     
+    @Transient
+    @JsonIgnore
+    private MultipartFile file;
+    
+    @Transient
+    @JsonIgnore
+    private String confirmPassword;
+    
     @OneToOne
     @PrimaryKeyJoinColumn
     private Shipper shipper;
@@ -105,6 +120,7 @@ public class User implements Serializable {
     private Admin admin;
 
     public User() {
+        joinedDate = new Date();
     }
 
     public User(Integer id) {
@@ -143,12 +159,20 @@ public class User implements Serializable {
         this.password = password;
     }
 
-    public String getFullname() {
-        return fullname;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setFullname(String fullname) {
-        this.fullname = fullname;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getEmail() {
@@ -199,6 +223,22 @@ public class User implements Serializable {
         this.avatar = avatar;
     }
 
+    public String getConfirmPassword() {
+        return confirmPassword;
+    }
+
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
+    }
+
+    public MultipartFile getFile() {
+        return file;
+    }
+
+    public void setFile(MultipartFile file) {
+        this.file = file;
+    }
+    
     public Shipper getShipper() {
         return shipper;
     }

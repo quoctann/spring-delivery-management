@@ -1,5 +1,7 @@
 package com.edu.repository.impl;
 
+import com.edu.pojo.Customer;
+import com.edu.pojo.Shipper;
 import com.edu.pojo.User;
 import com.edu.repository.UserRepository;
 import java.util.List;
@@ -8,10 +10,12 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 
@@ -46,7 +50,32 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public boolean addUser(User user, String userRole) {
+    @Transactional(propagation = Propagation.REQUIRED) // Bật để thực hiện hai hành động liên tiếp có tính chất cha con
+    public boolean addUser(User user) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        try {
+            switch(user.getUserRole()) {
+                case User.ROLE_CUSTOMER:
+                    session.save(user);
+                    Customer customer = new Customer();
+                    customer.setCustomerId(user.getId());
+                    session.save(customer);
+                    return true;
+                    
+                case User.ROLE_SHIPPER:
+                    session.save(user);
+                    Shipper shipper = new Shipper();
+                    shipper.setShipperId(user.getId());
+                    session.save(shipper);
+                    return true;
+                    
+                default:
+                    break;
+            }
+        } catch (HibernateException ex) {
+            ex.printStackTrace();
+        }
+        
         return false;
     }
 }

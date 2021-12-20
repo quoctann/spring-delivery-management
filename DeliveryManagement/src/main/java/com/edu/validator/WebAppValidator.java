@@ -1,6 +1,7 @@
-// Cấu hình để sử dụng bean validator song song với validator tự làm
+// Cấu hình để sử dụng bean validator song song với spring validator tự làm
 package com.edu.validator;
 
+import com.edu.pojo.User;
 import java.util.Set;
 import javax.validation.ConstraintViolation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
+// Phải khai báo là component
 @Component
 public class WebAppValidator implements Validator {
 
@@ -21,14 +23,14 @@ public class WebAppValidator implements Validator {
         this.springValidators = springValidators;
     }
     
-    // ???
+    // Cho biết validator có được phép kiểm tra một lớp (mình chỉ định) hay không (phải chỉ định nó mới chạy)
     @Override
-    public boolean supports(Class<?> type) {
-//        return Product.class.isAssignableFrom(clazz);
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean supports(Class<?> clazz) {
+        return User.class.isAssignableFrom(clazz);
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
-    // Cấu hình để sử dụng song song
+    // Phương thức được gọi để kiểm tra dữ liệu của đối tượng lớp
     @Override
     public void validate(Object target, Errors errors) {
         // Duyệt qua bean validator
