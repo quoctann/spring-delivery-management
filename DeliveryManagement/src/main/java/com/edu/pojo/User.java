@@ -40,9 +40,9 @@ public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
     
-    public static final String ROLE_ADMIN = "admin";
-    public static final String ROLE_CUSTOMER = "customer";
-    public static final String ROLE_SHIPPER = "shipper";
+    public static final String ROLE_ADMIN = "ROLE_ADMIN";
+    public static final String ROLE_CUSTOMER = "ROLE_CUSTOMER";
+    public static final String ROLE_SHIPPER = "ROLE_SHIPPER";
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -91,7 +91,7 @@ public class User implements Serializable {
     
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 10)
+    @Size(min = 1, max = 45)
     @Column(name = "user_role")
     private String userRole;
     

@@ -27,9 +27,21 @@
         <put-attribute name="content" value="/WEB-INF/jsp/signup.jsp" />
     </definition>
     
-    <!-- Trang thông tin user -->
-    <definition name="profile" extends="baseLayout">
-        <put-attribute name="title" value="Đăng nhập" />
-        <put-attribute name="content" value="/WEB-INF/jsp/profile.jsp" />
+    <!-- Trang thông tin customer -->
+    <definition name="customerProfile" extends="baseLayout">
+        <put-attribute name="title" value="Thông tin khách hàng" />
+        <put-attribute name="content" value="/WEB-INF/jsp/customerProfile.jsp" />
+    </definition>
+    
+    <!-- Trang thông tin shipper -->
+    <definition name="shipperProfile" extends="baseLayout">
+        <put-attribute name="title" value="Thông tin shipper" />
+        <put-attribute name="content" value="/WEB-INF/jsp/shipperProfile.jsp" />
+    </definition>
+    
+    <!-- Trang admin (demo) -->
+    <definition name="admin" extends="baseLayout">
+        <put-attribute name="title" value="Trang quản trị" />
+        <put-attribute name="content" value="/WEB-INF/jsp/admin.jsp" />
     </definition>
 </tiles-definitions>

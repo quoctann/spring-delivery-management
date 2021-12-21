@@ -24,6 +24,10 @@
             <c:if test="${usernameAlreadyExists != null}">
                 <div class="alert alert-danger">${usernameAlreadyExists}</div>
             </c:if>
+                
+            <c:if test="${generalError != null}">
+                <div class="alert alert-danger">${generalError}</div>
+            </c:if>
 
             <div class="form-input text-center row justify-content-center">
                 <input class="input input-firstName" required type="text" name="firstName" id="firstName" placeholder="Họ và tên đệm">
@@ -62,8 +66,8 @@
                         </div>-->
             <div class="form-input text-center">
                 <select class="form-select input" name="userRole">
-                    <option selected value="customer">Đăng ký tài khoản khách hàng</option>
-                    <option value="shipper">Đăng ký tài khoản shipper (yêu cầu CMND/CCCD)</option>
+                    <option selected value="ROLE_CUSTOMER">Đăng ký tài khoản khách hàng</option>
+                    <option value="ROLE_SHIPPER">Đăng ký tài khoản shipper (yêu cầu CMND/CCCD)</option>
                 </select>
             </div>
             <div class="form-input text-center">

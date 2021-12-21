@@ -42,10 +42,10 @@ public class UserController {
         return "signup";
     }
 
-    @GetMapping("profile")
-    public String profile() {
-        return "profile";
-    }
+//    @GetMapping("profile")
+//    public String profile() {
+//        return "profile";
+//    }
       // Xử lý post request tạo tài khoản (đăng ký)
     @PostMapping("signup")
     public String signUp(Model model, 
@@ -69,6 +69,7 @@ public class UserController {
                     if (this.userDetailsService.addUser(user)) {
                         return "redirect:/signin";
                     }
+                    model.addAttribute("generalError", "Đăng ký tài khoản thất bại!");
                 }
             }
         }

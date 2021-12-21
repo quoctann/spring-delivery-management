@@ -77,12 +77,12 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         // Liên kết form login của mình vào spring security
-        http.formLogin().loginPage("/login")
+        http.formLogin().loginPage("/signin")
                 .usernameParameter("username")
                 .passwordParameter("password");
         
         // Nếu đăng nhập thành công hoặc thất bại thì redirect đến url
-        http.formLogin().defaultSuccessUrl("/").failureUrl("/login?error");
+        http.formLogin().defaultSuccessUrl("/").failureUrl("/signin?error");
         
         // Khi đăng nhập thành công thì nó sẽ gọi phương thức tùy chỉnh (lưu user data vào session)
         http.formLogin().successHandler(this.loginSuccessHandler);
@@ -92,14 +92,14 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         http.logout().logoutSuccessHandler(this.logoutSuccessHandler);
         
         // Khi không có quyền sẽ trả ra cái cờ
-        http.exceptionHandling().accessDeniedPage("/login?accessDenied");
+        http.exceptionHandling().accessDeniedPage("/signin?accessDenied");
         
         // Đăng nhập thành công bắt đầu phân quyền các endpoint với các quyền tương ứng
         http.authorizeRequests()
                 .antMatchers("/").permitAll()
-                .antMatchers("/admin/**").access("hasRole('admin')")
-                .antMatchers("/shipper/**").access("hasRole('shipper')")
-                .antMatchers("/customer/**").access("hasRole('customer')");
+                .antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
+                .antMatchers("/shipper/**").access("hasRole('ROLE_SHIPPER')")
+                .antMatchers("/customer/**").access("hasRole('ROLE_CUSTOMER')");
         
         // Khi gửi form nó tự bật để tránh bị chèn mã độc, tắt để chạy chương trình
         http.csrf().disable();
