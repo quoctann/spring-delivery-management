@@ -78,4 +78,16 @@ public class UserRepositoryImpl implements UserRepository {
         
         return false;
     }
+
+    @Override
+    public boolean updateInfo(User user) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        try {
+            session.update(user);
+            return true;
+        } catch (HibernateException ex) {
+            ex.printStackTrace();
+        }
+        return false;
+    }
 }

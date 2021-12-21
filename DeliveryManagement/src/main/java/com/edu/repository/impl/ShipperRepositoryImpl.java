@@ -1,9 +1,7 @@
 package com.edu.repository.impl;
 
-import com.edu.pojo.Customer;
-import com.edu.pojo.User;
-import com.edu.repository.CustomerRepository;
-import java.util.List;
+import com.edu.pojo.Shipper;
+import com.edu.repository.ShipperRepository;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,23 +11,23 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 @Transactional
-public class CustomerRepositoryImpl implements CustomerRepository {
+public class ShipperRepositoryImpl implements ShipperRepository {
     
     @Autowired
     private LocalSessionFactoryBean sessionFactory;
     
     @Override
-    public Customer getCustomerById(int id) {
+    public Shipper getShipperById(int id) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
-        return session.get(Customer.class, id);
+        return session.get(Shipper.class, id);
     }
 
     @Override
-    public boolean updateInfo(Customer customer) {
+    public boolean updateInfo(Shipper shipper) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         
         try {
-            session.update(customer);
+            session.update(shipper);
             return true;
         } catch (HibernateException ex) {
             ex.printStackTrace();
@@ -37,5 +35,5 @@ public class CustomerRepositoryImpl implements CustomerRepository {
         
         return false;
     }
-
+    
 }

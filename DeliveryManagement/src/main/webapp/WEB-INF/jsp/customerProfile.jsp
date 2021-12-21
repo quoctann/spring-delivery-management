@@ -98,53 +98,66 @@
 
                 <hr/>
                 <h3>Cập nhật thông tin</h3>
+
+                <c:if test="${generalErr != null}">
+                    <div class="alert alert-danger">${generalErr}</div>
+                </c:if>
+
+                <c:if test="${successfulUpdate != null}">
+                    <div class="alert alert-success">${successfulUpdate}</div>
+                </c:if>
+
+                <c:url value="/customer/user-info" var="userAction" />
+
                 <div class="col-md-9">
-                    <form>
+                    <form:form modelAttribute="user" action="${userAction}">
                         <div class="mb-3">
                             <label for="firstName" class="form-label">Tên</label>
                             <input type="text" name="firstName" class="form-control" id="firstName" value="${currentUser.firstName}">
                         </div>
-                        
+
                         <div class="mb-3">
                             <label for="lastName" class="form-label">Họ và tên đệm</label>
                             <input type="text" name="lastName" class="form-control" id="lastName" value="${currentUser.lastName}">
                         </div>
-                        
+
                         <div class="mb-3">
                             <label for="email" class="form-label">Email</label>
                             <input type="email" name="email" class="form-control" id="email" value="${currentUser.email}">
                         </div>
-                        
+
                         <div class="mb-3">
                             <label for="phone" class="form-label">Số điện thoại</label>
                             <input type="phone" name="phone" class="form-control" id="phone" value="${currentUser.phone}">
                         </div>
-                        
-                        <div class="mb-3">
-                            <label for="password" class="form-label">Mật khẩu</label>
-                            <input type="password" name="password" class="form-control" id="password" placeholder="*******">
-                        </div>
-                        
-                        <div class="mb-3">
-                            <label for="confirmPassword" class="form-label">Nhập lại mật khẩu</label>
-                            <input type="confirmPassword" name="confirmPassword" class="form-control" id="confirmPassword" placeholder="*******">
-                        </div>
-                        
+
+                        <!--                        <div class="mb-3">
+                                                    <label for="password" class="form-label">Mật khẩu</label>
+                                                    <input type="password" name="password" class="form-control" id="password" placeholder="*******">
+                                                </div>
+                                                
+                                                <div class="mb-3">
+                                                    <label for="confirmPassword" class="form-label">Nhập lại mật khẩu</label>
+                                                    <input type="confirmPassword" name="confirmPassword" class="form-control" id="confirmPassword" placeholder="*******">
+                                                </div>-->
+
                         <button type="submit" class="btn btn-primary">Lưu</button>
-                    </form>
+                    </form:form>
                 </div>
 
                 <hr/>
 
-<!--                <div class="col-md-9">
-                    <form>
+                <c:url value="/customer/info" var="action" />
+
+                <div class="col-md-9">
+                    <form:form modelAttribute="customer" action="${action}">
                         <div class="mb-3">
                             <label for="address" class="form-label">Địa chỉ</label>
-                            <textarea name="address" class="form-control" id="address" value="{currentUser.address}"></textarea>
+                            <input type="address" name="address" class="form-control" id="address" value="${address}">
                         </div>
                         <button type="submit" class="btn btn-primary">Lưu</button>
-                    </form>
-                </div>-->
+                    </form:form>
+                </div>
             </div>
         </div>
     </div>

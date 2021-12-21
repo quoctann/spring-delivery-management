@@ -78,5 +78,10 @@ public class UserServiceImpl implements UserService{
         
         return false;
     }
+
+    @Override
+    public boolean updateInfo(User user) {
+        return this.userRepository.updateInfo(user);
+    }
   
 }
