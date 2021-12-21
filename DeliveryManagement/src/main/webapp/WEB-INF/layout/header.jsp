@@ -37,7 +37,7 @@
                     <div class="dropdown-toggle d-flex flex-direction-row justify-content-center align-items-center">
                         <!-- <i class="fa fa-user-circle account-icon"></i> -->
                         <c:if test="${currentUser.avatar == null}">
-                            <img src="<c:url value='/images/default.png' />" alt='avatar' class="rounded-circle border border-primary me-2"
+                            <img src="<c:url value='/images/default.jpg' />" alt='avatar' class="rounded-circle border border-primary me-2"
                                  width="50" height="50" />
                         </c:if>
 
