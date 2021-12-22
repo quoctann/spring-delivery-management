@@ -5,6 +5,7 @@ import java.util.Set;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinColumns;
@@ -40,7 +41,7 @@ public class Customer implements Serializable {
     @Column(name = "address")
     private String address;
     
-    @OneToMany(mappedBy = "customerId")
+    @OneToMany(mappedBy = "customerId", fetch = FetchType.EAGER)
     private Set<Comment> commentSet;
     
     @OneToOne(mappedBy = "customer")

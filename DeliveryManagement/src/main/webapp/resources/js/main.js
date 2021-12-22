@@ -105,3 +105,48 @@ function validatePassword() {
 
 password.onchange = validatePassword;
 confirm_password.onkeyup = validatePassword;
+
+/*
+ *  +----------------------+
+ *  |                      |
+ *  |   CÁC CHỨC NĂNG API  |
+ *  |                      |
+ *  +----------------------+
+ */
+
+// Thêm comment trang shipper detail
+function addComment(shipperId, firstName, lastName, avatar) {
+    fetch("/DeliveryManagement/api/add-comment", {
+        method: "post",
+        body: JSON.stringify({
+            "content": document.getElementById("comment").value,
+            "shipperId": shipperId
+        }),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }).then(function(res) {
+        return res.json();
+    }).then(function(data) {
+        console.log(data)
+        let area = document.getElementById("commentBox");
+        if (avatar === null || avatar === "") {
+            avatar = "/DeliveryManagement/images/default.jpg";
+        }
+        date = new Date(data.createdDate);
+        createdDate = moment(date).fromNow()
+        area.innerHTML = `
+        <div class="comment-item row col-12">
+            <div class="current-user-avatar col-2">
+                <img class="avatar w-100 h-100" src="${avatar}" alt="nothing">
+            </div>
+            <div class="comment-content col-10 commentDate">
+                <b>${firstName} ${lastName}</b> 
+                <span>${createdDate}</span>
+                <br>
+                <div class="comment-text">${data.content}</div>
+            </div>
+        </div>
+        ` + area.innerHTML;
+    })
+}

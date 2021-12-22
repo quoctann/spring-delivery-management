@@ -56,6 +56,7 @@ public class User implements Serializable {
     @Column(name = "username")
     private String username;
     
+    @JsonIgnore
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 100)
@@ -107,14 +108,17 @@ public class User implements Serializable {
     @JsonIgnore
     private String confirmPassword;
     
+    @JsonIgnore
     @OneToOne
     @PrimaryKeyJoinColumn
     private Shipper shipper;
     
+    @JsonIgnore
     @OneToOne
     @PrimaryKeyJoinColumn
     private Customer customer;
     
+    @JsonIgnore
     @OneToOne
     @PrimaryKeyJoinColumn
     private Admin admin;

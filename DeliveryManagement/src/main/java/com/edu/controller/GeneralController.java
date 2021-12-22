@@ -41,7 +41,15 @@ public class GeneralController {
     
     // Endpoint để xem trang chi tiết một shipper + bình luận (đối với user đã đăng nhập -> sd rest api)
     @GetMapping("/shipper-detail/{id}")
-    public String shipperDetail(@PathVariable(value = "id") int shipperId, Model model) {
+    public String shipperDetail(@PathVariable(value = "id") int shipperId, Model model,
+            HttpSession session) {
+        
+        // Nếu user chưa đăng nhập thì không được xem trang này (chặn request bằng controller)
+        User signedUser = (User) session.getAttribute("currentUser");
+        if (signedUser == null) {
+            return "403";
+        }
+        
         Shipper shipper = this.shipperService.getShipperById(shipperId);
         User userIsShipper = this.userDetailsService.getUserById(shipperId);
         

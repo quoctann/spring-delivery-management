@@ -36,71 +36,66 @@
 
             <!-- Bình luận -->
             <div class="comment col-md-9">
-                <h1 class="title">Bình luận và đánh giá</h1>
-                <!-- Đăng nhập rồi mới có -->
-                <div class="row cmt-input align-items-center justify-content-center">
-                    <c:if test="${currentUser.avatar == null}">
-                        <div class="current-user-avatar col-2">
-                            <img class="avatar w-100 h-100" src="<c:url value='/images/default.png' />" alt="nothing">
-                        </div>
-                    </c:if>
-                    <c:if test="${currentUser.avatar != null}">
-                        <div class="current-user-avatar col-2">
-                            <img class="avatar w-100 h-100" src="${userAsShipperInfo.avatar}" alt="nothing">
-                        </div>
-                    </c:if>
-                    <form class="d-flex col-10" action="" method="post">
-                        <textarea class="flex-fill input" id="comment" rows="1" type="text" placeholder="Nhập bình luận"></textarea>
-                        <button class="btn btn-readmore" type="submit">Bình luận</button>
-                    </form>
-                </div>
-                <!-- End input block -->
-                <div class="comment-box row justify-content-end">
-                    <div class="comment-item row col-12">
-                        <c:if test="${currentUser.avatar != null}">
+                <h1 class="title">Bình luận</h1>
+                <!-- Đăng nhập bằng customer rồi mới có -->
+                <c:if test="${currentUser.userRole == 'ROLE_CUSTOMER'}">
+                    <div class="row cmt-input align-items-center justify-content-center">
+                        <c:if test="${currentUser.avatar == null}">
                             <div class="current-user-avatar col-2">
-                                <img class="avatar w-100 h-100" src="<c:url value='/images/default.jpg' />" alt="nothing">
+                                <img class="avatar w-100 h-100" src="<c:url value='/images/default.png' />" alt="nothing">
                             </div>
                         </c:if>
-                        <c:if test="${currentUser.avatar == null}">
+                        <c:if test="${currentUser.avatar != null}">
                             <div class="current-user-avatar col-2">
                                 <img class="avatar w-100 h-100" src="${userAsShipperInfo.avatar}" alt="nothing">
                             </div>
                         </c:if>
-                        <div class="comment-content col-10">
-                            <b>Name</b> <span>29/10/2000</span>
-                            <br>
-                            <div class="comment-text">
-                                Một hai ba bốn năm sáu bảy tám chín mười mười một mười hai mười ba
+
+                        <form class="d-flex col-10">
+                            <textarea class="flex-fill input" id="comment" rows="1" type="text" placeholder="Nhập bình luận"></textarea>
+                            <button 
+                                class="btn btn-readmore" 
+                                type="button" 
+                                onclick="addComment(${shipperInfo.shipperId}, '${userAsShipperInfo.firstName}', '${userAsShipperInfo.lastName}', '${userAsShipperInfo.avatar}' )"
+                            >Bình luận</button>
+                        </form>
+                    </div>
+                </c:if>
+                <!-- End input block -->
+                <div class="comment-box row justify-content-end" id="commentBox">
+                    <c:forEach items="${shipperInfo.commentSet}" var="comment">
+                        <div class="comment-item row col-12">
+                            <c:if test="${comment.customerId.user.avatar == null}">
+                                <div class="current-user-avatar col-2">
+                                    <img class="avatar w-100 h-100" src="<c:url value='/images/default.jpg' />" alt="nothing">
+                                </div>
+                            </c:if>
+                            <c:if test="${comment.customerId.user.avatar != null}">
+                                <div class="current-user-avatar col-2">
+                                    <img class="avatar w-100 h-100" src="${comment.customerId.user.avatar}" alt="nothing">
+                                </div>
+                            </c:if>
+                            
+                            <div class="comment-content col-10 commentDate">
+                                <b>${comment.customerId.user.firstName} ${comment.customerId.user.lastName}</b> 
+                                <span>${comment.createdDate}</span>
+                                <br>
+                                <div class="comment-text">${comment.content}</div>
                             </div>
                         </div>
-                    </div>
-                    <div class="comment-item row col-12">
-                        <div class="current-user-avatar col-2">
-                            <img class="avatar w-100 h-100" src="/image/Suar.png" alt="nothing">
-                        </div>
-                        <div class="comment-content col-10">
-                            <b>Name</b> <span>29/10/2000</span>
-                            <br>
-                            <div class="comment-text">
-                                Một hai ba bốn năm sáu bảy tám chín mười mười một mười hai mười ba, Một hai ba bốn năm sáu bảy tám chín mười mười một mười hai mười ba, Một hai ba bốn năm sáu bảy tám chín mười mười một mười hai mười ba
-                            </div>
-                        </div>
-                    </div>
-                    <div class="comment-item row col-12">
-                        <div class="current-user-avatar col-2">
-                            <img class="avatar w-100 h-100" src="/image/Suar.png" alt="nothing">
-                        </div>
-                        <div class="comment-content col-10">
-                            <b>Name</b> <span>29/10/2000</span>
-                            <br>
-                            <div class="comment-text">
-                                Một hai ba bốn năm sáu bảy tám chín mười mười một mười hai mười ba
-                            </div>
-                        </div>
-                    </div>
+                    </c:forEach>
                 </div>
             </div>
         </div>
     </div>
 </section>
+<script>
+    window.addEventListener("load", function() {
+        let dates = document.querySelectorAll(".commentDate > span");
+        for (let i = 0; i < dates.length; i++) {
+            let d = dates[i]
+            d.innerText = moment(d.innerText).fromNow()
+//            console.log("js on detail page")
+        }
+    });
+</script>

@@ -4,14 +4,14 @@
 <header>
     <nav class="navbar navbar-light navbar-expand-lg bg-light sticky-top">
         <div class="container header">
-            <a class="navbar-brand row justify-content-center align-items-center" href="#">
+            <a class="navbar-brand row justify-content-center align-items-center" href="<c:url value="/" />">
                 <i class="fa fa-shipping-fast brand-logo col"></i>
                 <h1 class="brand-text col">ShipEveryWhere</h1>
             </a>
             <div class="collapse navbar-collapse me-auto menu" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link active" href="#">Trang chủ</a>
+                        <a class="nav-link active" href="<c:url value="/" />">Trang chủ</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Nhân viên</a>
