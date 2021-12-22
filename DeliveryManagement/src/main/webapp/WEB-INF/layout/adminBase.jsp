@@ -16,6 +16,7 @@
               integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
               crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link href="<c:url value="/css/admin.css" />" rel="stylesheet" />
+        <!--<link href="<c:url value="/css/main.css" />" rel="stylesheet" />-->
     </head>
     <body>
         <!-- HEADER -->
