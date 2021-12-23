@@ -4,14 +4,14 @@
 <header>
     <nav class="navbar navbar-light navbar-expand-lg bg-light sticky-top">
         <div class="container header">
-            <a class="navbar-brand row justify-content-center align-items-center" href="#">
+            <a class="navbar-brand row justify-content-center align-items-center" href="<c:url value="/" />">
                 <i class="fa fa-shipping-fast brand-logo col"></i>
                 <h1 class="brand-text col">ShipEveryWhere</h1>
             </a>
             <div class="collapse navbar-collapse me-auto menu" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link active" href="#">Trang chủ</a>
+                        <a class="nav-link active" href="<c:url value="/" />">Trang chủ</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Nhân viên</a>
@@ -37,7 +37,7 @@
                     <div class="dropdown-toggle d-flex flex-direction-row justify-content-center align-items-center">
                         <!-- <i class="fa fa-user-circle account-icon"></i> -->
                         <c:if test="${currentUser.avatar == null}">
-                            <img src="<c:url value='/images/default.png' />" alt='avatar' class="rounded-circle border border-primary me-2"
+                            <img src="<c:url value='/images/default.jpg' />" alt='avatar' class="rounded-circle border border-primary me-2"
                                  width="50" height="50" />
                         </c:if>
 

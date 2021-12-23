@@ -24,8 +24,8 @@ public class OrderServiceImpl implements OrderService {
     
     
     @Override
-    public List<Order> getOrder(String keyword, int page) {
-        return this.orderRepository.getOrders(keyword, page);
+    public List<Order> getOrder(String keyword, int page, String sort) {
+        return this.orderRepository.getOrders(keyword, page, sort);
     }
 
     @Override

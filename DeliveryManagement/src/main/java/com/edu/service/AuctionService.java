@@ -5,9 +5,12 @@
  */
 package com.edu.service;
 
+import com.edu.pojo.Auction;
+
 /**
  *
  * @author beanp
  */
-public interface AuctionService { 
+public interface AuctionService {
+    boolean addOrUpdateAuction(Auction auction);
 }

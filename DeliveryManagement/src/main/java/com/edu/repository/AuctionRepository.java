@@ -16,5 +16,5 @@ import java.util.List;
 public interface AuctionRepository {
     Auction getAuctionById(int id);
     List<Auction> getAuctions();
-    boolean addAuction(Auction auction);
+    boolean addOrUpdateAuction(Auction auction);
 }

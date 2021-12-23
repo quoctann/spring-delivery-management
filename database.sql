@@ -80,12 +80,13 @@ CREATE TABLE `comment` (
   `shipper_id` int DEFAULT NULL,
   `customer_id` int DEFAULT NULL,
   `content` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_date` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_comment_shipper_idx` (`shipper_id`),
   KEY `fk_comment_customer_idx` (`customer_id`),
   CONSTRAINT `fk_comment_customer` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`customer_id`),
   CONSTRAINT `fk_comment_shipper` FOREIGN KEY (`shipper_id`) REFERENCES `shipper` (`shipper_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -94,6 +95,7 @@ CREATE TABLE `comment` (
 
 LOCK TABLES `comment` WRITE;
 /*!40000 ALTER TABLE `comment` DISABLE KEYS */;
+INSERT INTO `comment` VALUES (1,3,2,'Te','2021-12-21 00:00:00'),(2,3,7,'Ok','2021-12-21 00:00:00'),(3,3,2,'Dich vu ok','2021-12-22 09:00:00'),(4,3,7,'Giao hang cham','2021-12-22 10:00:00'),(5,3,2,'On','2021-12-22 12:00:00'),(6,3,7,'Giao hang nhanh','2021-12-22 00:00:00'),(7,3,2,'Dich vu te','2021-12-22 00:00:00');
 /*!40000 ALTER TABLE `comment` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -220,7 +222,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'admin','$2a$10$cf14sE1XtR5kpst301HIk.DacAAVETBk.F5romIi/K46fyQqPrgMy','Tran Quoc Tan','admin@mail.com','01234567890','2021-01-01',1,'ROLE_ADMIN','https://res.cloudinary.com/open-edu/image/upload/v1629294770/sample.jpg','Tấn'),(2,'customer','$2a$10$cf14sE1XtR5kpst301HIk.DacAAVETBk.F5romIi/K46fyQqPrgMy','Quoc Tan','customer@mail.com','01234567111','2021-12-21',0,'ROLE_CUSTOMER','https://res.cloudinary.com/open-edu/image/upload/v1629294770/sample.jpg','Tran'),(3,'shipper','$2a$10$5X9k5N1sTc1/CjVH5XJoje3QMYijH3ETpgkox00R0MdPaJPPrf7wO','An','shipper@mail.com','01234567898','2021-12-21',0,'ROLE_SHIPPER','https://res.cloudinary.com/open-edu/image/upload/v1629294770/sample.jpg','Le Van'),(7,'tantran','$2a$10$frwXswryzgKiCxRcy2tYwuFE74qe0qKyy..ppGtcheMm7K4wEmxsW','Trần','tan@mail.com','0706638940','2021-12-20',1,'ROLE_CUSTOMER','https://res.cloudinary.com/open-edu/image/upload/v1639985372/g2xfmsp10a2txawb0dyd.jpg','Tấn'),(8,'ship1','$2a$10$GeGwC3lijS90qTeyKdiAwOGRnhfeYG5wGmewMVPMUcRoEg4BgiGMW','Lê','ship@mail.com','0706638940','2021-12-20',1,'ROLE_SHIPPER','https://res.cloudinary.com/open-edu/image/upload/v1639986150/hhzr0061dxhnnpa6sijv.jpg','Ship'),(9,'test0','$2a$10$a0sqPGxUQ3ZNjNAtVPSOZ.ONbP9M2taWYMQGsNODuIRZoXSt8bWlW','Test99','test0@mail.com','0706638940','2021-12-20',1,'ROLE_SHIPPER','https://res.cloudinary.com/open-edu/image/upload/v1639987020/ym8ccwbxngbqyhlhwhoa.jpg','Test99'),(10,'vjp','$2a$10$cf14sE1XtR5kpst301HIk.DacAAVETBk.F5romIi/K46fyQqPrgMy','Trần','181050127tan@ou.edu.vn','0706638940','2021-12-20',1,'ROLE_CUSTOMER','https://res.cloudinary.com/open-edu/image/upload/v1640001020/hvne4lq3bz3nufnsexp3.jpg','Tấn'),(11,'customerX','$2a$10$JrgCJwmrXDg7B2w8PX4aKuoK6ALZ3Ga5ohmJh/uG3rYT6jDznIose','Quốc','181050127tan@ou.edu.vn','0706638940','2021-12-21',1,'ROLE_CUSTOMER','https://res.cloudinary.com/open-edu/image/upload/v1640059389/swto0zmob2me10yo79ei.png','Tấn'),(12,'customer','$2a$10$cf14sE1XtR5kpst301HIk.DacAAVETBk.F5romIi/K46fyQqPrgMy','quoc tan','customer@mail.com','01234567899','2021-12-21',0,'ROLE_CUSTOMER','https://res.cloudinary.com/open-edu/image/upload/v1629294770/sample.jpg','tran'),(13,'customer','$2a$10$cf14sE1XtR5kpst301HIk.DacAAVETBk.F5romIi/K46fyQqPrgMy','quoc tan','customer@mail.com','01234567899','2021-12-21',0,'ROLE_CUSTOMER','https://res.cloudinary.com/open-edu/image/upload/v1629294770/sample.jpg','tran');
+INSERT INTO `user` VALUES (1,'admin','$2a$10$cf14sE1XtR5kpst301HIk.DacAAVETBk.F5romIi/K46fyQqPrgMy','Tran Quoc Tan','admin@mail.com','01234567890','2021-01-01',1,'ROLE_ADMIN','https://res.cloudinary.com/open-edu/image/upload/v1629294770/sample.jpg','Tấn'),(2,'customer','$2a$10$cf14sE1XtR5kpst301HIk.DacAAVETBk.F5romIi/K46fyQqPrgMy','Quoc Tan 2000','customer@mail.com','01234567111','2021-12-21',0,'ROLE_CUSTOMER','https://res.cloudinary.com/open-edu/image/upload/v1629294770/sample.jpg','Tran'),(3,'shipper','$2a$10$5X9k5N1sTc1/CjVH5XJoje3QMYijH3ETpgkox00R0MdPaJPPrf7wO','An','shipper@mail.com','01234567898','2021-12-21',0,'ROLE_SHIPPER','https://res.cloudinary.com/open-edu/image/upload/v1629294770/sample.jpg','Le Van'),(7,'tantran','$2a$10$frwXswryzgKiCxRcy2tYwuFE74qe0qKyy..ppGtcheMm7K4wEmxsW','Trần','tan@mail.com','0706638940','2021-12-20',1,'ROLE_CUSTOMER','https://res.cloudinary.com/open-edu/image/upload/v1639985372/g2xfmsp10a2txawb0dyd.jpg','Tấn'),(8,'ship1','$2a$10$GeGwC3lijS90qTeyKdiAwOGRnhfeYG5wGmewMVPMUcRoEg4BgiGMW','Lê','ship@mail.com','0706638940','2021-12-20',1,'ROLE_SHIPPER','https://res.cloudinary.com/open-edu/image/upload/v1639986150/hhzr0061dxhnnpa6sijv.jpg','Ship'),(9,'test0','$2a$10$a0sqPGxUQ3ZNjNAtVPSOZ.ONbP9M2taWYMQGsNODuIRZoXSt8bWlW','Test99','test0@mail.com','0706638940','2021-12-20',1,'ROLE_SHIPPER','https://res.cloudinary.com/open-edu/image/upload/v1639987020/ym8ccwbxngbqyhlhwhoa.jpg','Test99'),(10,'vjp','$2a$10$cf14sE1XtR5kpst301HIk.DacAAVETBk.F5romIi/K46fyQqPrgMy','Trần','181050127tan@ou.edu.vn','0706638940','2021-12-20',1,'ROLE_CUSTOMER','https://res.cloudinary.com/open-edu/image/upload/v1640001020/hvne4lq3bz3nufnsexp3.jpg','Tấn'),(11,'customerX','$2a$10$JrgCJwmrXDg7B2w8PX4aKuoK6ALZ3Ga5ohmJh/uG3rYT6jDznIose','Quốc','181050127tan@ou.edu.vn','0706638940','2021-12-21',1,'ROLE_CUSTOMER','https://res.cloudinary.com/open-edu/image/upload/v1640059389/swto0zmob2me10yo79ei.png','Tấn');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -233,4 +235,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-12-21 13:47:44
+-- Dump completed on 2021-12-22 16:28:20

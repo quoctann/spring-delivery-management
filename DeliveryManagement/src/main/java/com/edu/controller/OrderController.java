@@ -19,20 +19,5 @@ import org.springframework.web.bind.annotation.RequestParam;
  */
 
 @Controller
-public class OrderController {
-    
-    @Autowired
-    private OrderService orderService;
-    
-    @RequestMapping("/auction")
-    public String auction(Model model, @RequestParam(required = false) Map<String, String> params) {
-        
-        int page = Integer.parseInt(params.getOrDefault("page", "1"));
-        String keyword = params.getOrDefault("keyword","");
-
-        model.addAttribute("orders", this.orderService.getOrder(keyword, page));
-        model.addAttribute("count", this.orderService.countOrder());
-        
-        return "auction";
-    }
+public class OrderController {   
 }

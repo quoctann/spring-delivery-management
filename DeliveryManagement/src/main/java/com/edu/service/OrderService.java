@@ -13,6 +13,6 @@ import java.util.List;
  * @author beanp
  */
 public interface OrderService {
-    List<Order> getOrder(String keyword, int page);
+    List<Order> getOrder(String keyword, int page, String sort);
     Long countOrder();
 }

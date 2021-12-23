@@ -5,6 +5,7 @@ import java.util.Set;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -51,7 +52,7 @@ public class Shipper implements Serializable {
     @OneToOne(mappedBy = "shipper")
     private User user;
     
-    @OneToMany(mappedBy = "shipperId")
+    @OneToMany(mappedBy = "shipperId", fetch = FetchType.EAGER)
     private Set<Comment> commentSet;
     
     @OneToMany(mappedBy = "shipperId")

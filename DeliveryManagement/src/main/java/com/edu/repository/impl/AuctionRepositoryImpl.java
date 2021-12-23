@@ -43,10 +43,10 @@ public class AuctionRepositoryImpl implements AuctionRepository {
     };
     
     @Override
-    public boolean addAuction(Auction auction) {
+    public boolean addOrUpdateAuction(Auction auction) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         try{
-            session.save(auction);
+            session.saveOrUpdate(auction);
             return true;
         }catch (HibernateException ex){
             ex.printStackTrace();

@@ -13,6 +13,6 @@ import com.edu.pojo.Order;
 import java.util.List;
 
 public interface OrderRepository {
-    List<Order> getOrders(String keyword, int page);
+    List<Order> getOrders(String keyword, int page, String sort);
     Long countOrder();
 }

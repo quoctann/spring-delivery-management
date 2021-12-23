@@ -32,7 +32,7 @@ public class OrderRepositoryImpl implements OrderRepository {
     private LocalSessionFactoryBean sessionFactory;
     
     @Override
-    public List<Order> getOrders(String keyword, int page) {
+    public List<Order> getOrders(String keyword, int page, String sort) {
 
         Session session = this.sessionFactory.getObject().getCurrentSession();
     
@@ -49,7 +49,19 @@ public class OrderRepositoryImpl implements OrderRepository {
         
             
         query = query.where(p);
+        System.out.println(sort);
+        if (sort.equals("des")) {
+             System.out.println("in des");
+            query = query.orderBy(builder.desc(root.get("id")));
+        }
+        if (sort.equals("asc"))
+        {
+             System.out.println("in asc");
+            query = query.orderBy(builder.asc(root.get("id")));
+        };
+        
         Query q = session.createQuery(query);
+        
         
         int max = 10;
         q.setMaxResults(max);

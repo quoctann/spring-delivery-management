@@ -8,6 +8,9 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
+
+<c:url value="/auction" var="action" />
+
 <!-- Auction -->
 <section id="auction">
     <div class="container">
@@ -25,9 +28,9 @@
             </div>
             <div class="sort col-7 d-flex align-items-center justify-content-end">
                 <span>Sắp xếp theo :</span>
-                <select class="form-select" aria-label="Default select">
-                    <option value="#" selected><a href="#">Gần đây</a></option>
-                    <option selected><a href="#"></a></option>>
+                <select id="sort" class="form-select" onchange="location = this.value;" aria-label="Default select">
+                    <option value="<c:url value="/auction?sort=des"/>" >Gần đây</option>
+                    <option value="<c:url value="/auction?sort=asc"/>" >Cũ nhất</option>
                 </select>
             </div>
         </div>
@@ -54,40 +57,10 @@
                         <td>Loại ${o.type}</td>
                         <td>${o.sentFrom}</td>
                         <td>${o.sentTo}</td>                      
-                        <td><button class="btn btn-primary btnAuction" data="10" data-bs-toggle="modal" data-bs-target="#auctionModal">Đấu giá</button></td>
+                        <td><button class="btn btn-primary btnAuction" data="${o.id}" data-bs-toggle="modal" data-bs-target="#auctionModal">Đấu giá</button></td>
                         <td><i id="time">${o.createdDate}</i></td>
                     </tr>
                 </c:forEach>
-                <!--                <tr>
-                                    <th scope="row">1</th>
-                                    <td><img src="<c:url value='/images/Suar.png' />" width="150" height="150" alt=""></td>
-                                    <td><b>Cần chuyển hàng đi đâu đó</b></td>
-                                    <td>Loại 1</td>
-                                    <td>123, Xã abc gì đó, Huyện không biết, Thành phố Hồ Chí Minh</td>
-                                    <td>123, Xã abc gì đó, Huyện không biết, Thành phố Hồ Chí Minh</td>                      
-                                    <td><button class="btn btn-primary btnAuction" data="10" data-bs-toggle="modal" data-bs-target="#auctionModal">Đấu giá</button></td>
-                                    <td><i>12 Giờ trước</i></td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">2</th>
-                                    <td><img src="<c:url value='/images/Suar.png' />" width="150" height="150" alt=""></td>
-                                    <td><b>Cần chuyển hàng đi đâu đó</b></td>
-                                    <td>Loại 1</td>
-                                    <td>123, Xã abc gì đó, Huyện không biết, Thành phố Hồ Chí Minh</td>
-                                    <td>123, Xã abc gì đó, Huyện không biết, Thành phố Hồ Chí Minh</td>                      
-                                    <td><button class="btn btn-primary btnAuction" data="0" data-bs-toggle="modal" data-bs-target="#auctionModal">Đấu giá</button></td>
-                                    <td><i>12 Giờ trước</i></td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">3</th>
-                                    <td><img src="<c:url value='/images/Suar.png' />" width="150" height="150" alt=""></td>
-                                    <td><b>Cần chuyển hàng đi đâu đó</b></td>
-                                    <td>Loại 1</td>
-                                    <td>123, Xã abc gì đó, Huyện không biết, Thành phố Hồ Chí Minh</td>
-                                    <td>123, Xã abc gì đó, Huyện không biết, Thành phố Hồ Chí Minh</td>                      
-                                    <td><button class="btn btn-primary btnAuction" data="5" data-bs-toggle="modal" data-bs-target="#auctionModal">Đấu giá</button></td>
-                                    <td><i>12 Giờ trước</i></td>
-                                </tr>-->
             </tbody>
         </table>
         <div class="modal fade" id="auctionModal" tabindex="-1" aria-labelledby="auctionModal" aria-hidden="true">
@@ -98,9 +71,10 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form action="">
+                        <form method="post" action="${action}">
                             <input id="price" class="input" type="number" step="1000" min="0">
                             <label for="price">VND</label>
+                            <input id="orderId" class="input" type="hidden">
                             <br>
                             <button class="btn btn-readmore" type="submit">Đấu giá</button>
                         </form>

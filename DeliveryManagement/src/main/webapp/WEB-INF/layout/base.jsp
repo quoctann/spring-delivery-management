@@ -40,10 +40,9 @@
      <script>
      var t = document.querySelectorAll("#time");
      moment.locale("vi");
-     console.log(t)
      t.forEach((item)=> {
          item.innerText = moment(item.innerText).fromNow();
-     })
+     });
 </script> 
     <script src="<c:url value='/js/main.js'/>"></script>
 </html>
