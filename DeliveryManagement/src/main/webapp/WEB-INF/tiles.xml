@@ -41,6 +41,12 @@
         <put-attribute name="content" value="/WEB-INF/jsp/shipperProfile.jsp" />
     </definition>
     
+    <!-- Trang Đấu Giá -->
+    <definition name="auction" extends="baseLayout">
+        <put-attribute name="title" value="Đấu giá" />
+        <put-attribute name="content" value="/WEB-INF/jsp/auction.jsp" />
+    </definition>
+    
     <!-- Trang chi tiết shipper có bình luận -->
     <definition name="shipperDetail" extends="baseLayout">
         <put-attribute name="title" value="Chi tiết shipper" />

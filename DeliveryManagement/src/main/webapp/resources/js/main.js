@@ -5,6 +5,18 @@ window.onload = function() {
   preloader.style.display = "none";
 }
 
+// Pass data to modal
+var modalInput = document.querySelector("#price");
+var hiddenInput = document.querySelector("#orderId");
+var btnAuction = document.querySelectorAll(".btnAuction");
+btnAuction.forEach((btn)=> {
+  btn.addEventListener("click", () => {
+    console.log(btn);
+    let data = btn.getAttribute("data");
+    hiddenInput.value = data;
+  }) 
+})
+
 
 function showAvatar() {
   var file = document.getElementById("file").files[0];

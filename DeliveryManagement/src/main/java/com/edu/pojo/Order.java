@@ -22,7 +22,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 @Entity
-@Table(name = "order")
+@Table(name = "`order`")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Order.findAll", query = "SELECT o FROM Order o"),
