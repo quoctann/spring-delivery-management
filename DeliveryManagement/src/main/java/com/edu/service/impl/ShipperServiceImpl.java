@@ -42,5 +42,10 @@ public class ShipperServiceImpl implements ShipperService {
     public boolean approveShipper(int adminId, int shipperId) {
         return this.shipperRepository.approveShipper(adminId, shipperId);
     }
+
+    @Override
+    public boolean partialUpdateByAdmin(int shipperId, String email, String phone, String idCard) {
+        return this.shipperRepository.partialUpdateByAdmin(shipperId, email, phone, idCard);
+    }
     
 }

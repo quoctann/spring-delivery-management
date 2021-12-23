@@ -189,7 +189,7 @@ CREATE TABLE `shipper` (
 
 LOCK TABLES `shipper` WRITE;
 /*!40000 ALTER TABLE `shipper` DISABLE KEYS */;
-INSERT INTO `shipper` VALUES (3,1,'123456',0),(8,1,'',0),(9,1,NULL,0);
+INSERT INTO `shipper` VALUES (3,1,'123456',0),(8,1,'999888',0),(9,1,'123',0);
 /*!40000 ALTER TABLE `shipper` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -223,7 +223,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'admin','$2a$10$cf14sE1XtR5kpst301HIk.DacAAVETBk.F5romIi/K46fyQqPrgMy','Tran Quoc Tan','admin@mail.com','01234567890','2021-01-01',1,'ROLE_ADMIN','https://res.cloudinary.com/open-edu/image/upload/v1629294770/sample.jpg','Tấn'),(2,'customer','$2a$10$cf14sE1XtR5kpst301HIk.DacAAVETBk.F5romIi/K46fyQqPrgMy','Quoc Tan 2000','customer@mail.com','01234567111','2021-12-21',0,'ROLE_CUSTOMER','https://res.cloudinary.com/open-edu/image/upload/v1629294770/sample.jpg','Tran'),(3,'shipper','$2a$10$5X9k5N1sTc1/CjVH5XJoje3QMYijH3ETpgkox00R0MdPaJPPrf7wO','An','shipper@mail.com','01234567898','2021-12-21',1,'ROLE_SHIPPER','https://res.cloudinary.com/open-edu/image/upload/v1629294770/sample.jpg','Le Van'),(7,'tantran','$2a$10$frwXswryzgKiCxRcy2tYwuFE74qe0qKyy..ppGtcheMm7K4wEmxsW','Trần','tan@mail.com','0706638940','2021-12-20',1,'ROLE_CUSTOMER','https://res.cloudinary.com/open-edu/image/upload/v1639985372/g2xfmsp10a2txawb0dyd.jpg','Tấn'),(8,'ship1','$2a$10$GeGwC3lijS90qTeyKdiAwOGRnhfeYG5wGmewMVPMUcRoEg4BgiGMW','Lê','ship@mail.com','0706638940','2021-12-20',1,'ROLE_SHIPPER','https://res.cloudinary.com/open-edu/image/upload/v1639986150/hhzr0061dxhnnpa6sijv.jpg','Ship'),(9,'test0','$2a$10$a0sqPGxUQ3ZNjNAtVPSOZ.ONbP9M2taWYMQGsNODuIRZoXSt8bWlW','Test99','test0@mail.com','0706638940','2021-12-20',1,'ROLE_SHIPPER','https://res.cloudinary.com/open-edu/image/upload/v1639987020/ym8ccwbxngbqyhlhwhoa.jpg','Test99'),(10,'vjp','$2a$10$cf14sE1XtR5kpst301HIk.DacAAVETBk.F5romIi/K46fyQqPrgMy','Trần','181050127tan@ou.edu.vn','0706638940','2021-12-20',1,'ROLE_CUSTOMER','https://res.cloudinary.com/open-edu/image/upload/v1640001020/hvne4lq3bz3nufnsexp3.jpg','Tấn'),(11,'customerX','$2a$10$JrgCJwmrXDg7B2w8PX4aKuoK6ALZ3Ga5ohmJh/uG3rYT6jDznIose','Quốc','181050127tan@ou.edu.vn','0706638940','2021-12-21',1,'ROLE_CUSTOMER','https://res.cloudinary.com/open-edu/image/upload/v1640059389/swto0zmob2me10yo79ei.png','Tấn');
+INSERT INTO `user` VALUES (1,'admin','$2a$10$cf14sE1XtR5kpst301HIk.DacAAVETBk.F5romIi/K46fyQqPrgMy','Tran Quoc Tan','admin@mail.com','01234567890','2021-01-01',1,'ROLE_ADMIN','https://res.cloudinary.com/open-edu/image/upload/v1629294770/sample.jpg','Tấn'),(2,'customer','$2a$10$cf14sE1XtR5kpst301HIk.DacAAVETBk.F5romIi/K46fyQqPrgMy','Quoc Tan 2000','customer@mail.com','01234567111','2021-12-21',0,'ROLE_CUSTOMER','https://res.cloudinary.com/open-edu/image/upload/v1629294770/sample.jpg','Tran'),(3,'shipper','$2a$10$5X9k5N1sTc1/CjVH5XJoje3QMYijH3ETpgkox00R0MdPaJPPrf7wO','An','shipper@mail.com','01234567898','2021-12-21',1,'ROLE_SHIPPER','https://res.cloudinary.com/open-edu/image/upload/v1629294770/sample.jpg','Le Van'),(7,'tantran','$2a$10$frwXswryzgKiCxRcy2tYwuFE74qe0qKyy..ppGtcheMm7K4wEmxsW','Trần','tan@mail.com','0706638940','2021-12-20',1,'ROLE_CUSTOMER','https://res.cloudinary.com/open-edu/image/upload/v1639985372/g2xfmsp10a2txawb0dyd.jpg','Tấn'),(8,'ship1','$2a$10$GeGwC3lijS90qTeyKdiAwOGRnhfeYG5wGmewMVPMUcRoEg4BgiGMW','Lê','shipedited@mail.com','0706638941','2021-12-20',1,'ROLE_SHIPPER','https://res.cloudinary.com/open-edu/image/upload/v1639986150/hhzr0061dxhnnpa6sijv.jpg','Ship'),(9,'test0','$2a$10$a0sqPGxUQ3ZNjNAtVPSOZ.ONbP9M2taWYMQGsNODuIRZoXSt8bWlW','Test99','test@mail.com','0706638940','2021-12-20',0,'ROLE_SHIPPER','https://res.cloudinary.com/open-edu/image/upload/v1639987020/ym8ccwbxngbqyhlhwhoa.jpg','Test99'),(10,'vjp','$2a$10$cf14sE1XtR5kpst301HIk.DacAAVETBk.F5romIi/K46fyQqPrgMy','Trần','181050127tan@ou.edu.vn','0706638940','2021-12-20',1,'ROLE_CUSTOMER','https://res.cloudinary.com/open-edu/image/upload/v1640001020/hvne4lq3bz3nufnsexp3.jpg','Tấn'),(11,'customerX','$2a$10$JrgCJwmrXDg7B2w8PX4aKuoK6ALZ3Ga5ohmJh/uG3rYT6jDznIose','Quốc','181050127tan@ou.edu.vn','0706638940','2021-12-21',1,'ROLE_CUSTOMER','https://res.cloudinary.com/open-edu/image/upload/v1640059389/swto0zmob2me10yo79ei.png','Tấn');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -236,4 +236,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-12-23 17:47:11
+-- Dump completed on 2021-12-23 21:14:08

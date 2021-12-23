@@ -65,6 +65,25 @@ public class ShipperRepositoryImpl implements ShipperRepository {
             query = query.where(pre);
         }
         
+        if (filterType != null) {
+            switch(filterType) {
+                case "pending":
+                    query = query.where(builder.isNull(rootUser.get("shipper").get("approvedBy")));
+                    break;
+                    
+                case "active":
+                    query = query.where(builder.equal(rootUser.get("active").as(Integer.class), 1));
+                    break;
+                    
+                case "inactive":
+                    query = query.where(builder.equal(rootUser.get("active").as(Integer.class), 0));
+                    break;
+                    
+                default:
+                    break;
+            }
+        }
+        
         // Tài khoản mới nhất lên trước
         query = query.orderBy(builder.asc(rootUser.get("id")));
         
@@ -80,7 +99,8 @@ public class ShipperRepositoryImpl implements ShipperRepository {
                 rootUser.get("joinedDate"),
                 rootUser.get("shipper").get("idCard"),
                 rootUser.get("shipper").get("avgRating"),
-                rootUser.get("active")
+                rootUser.get("active"),
+                rootUser.get("shipper").get("approvedBy").get("adminId")
         );
         
         // Gom nhóm theo id
@@ -141,6 +161,27 @@ public class ShipperRepositoryImpl implements ShipperRepository {
         shipper.setApprovedBy(admin);
         userAsShipper.setActive((short) 1);
                 
+        try {
+            session.saveOrUpdate(userAsShipper);
+            session.saveOrUpdate(shipper);
+            return true;
+        } catch (HibernateException ex) {
+            ex.printStackTrace();
+        }
+        
+        return false;
+    }
+
+    @Override
+    public boolean partialUpdateByAdmin(int shipperId, String email, String phone, String idCard) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        
+        Shipper shipper = session.get(Shipper.class, shipperId);
+        User userAsShipper = session.get(User.class, shipperId);
+        userAsShipper.setEmail(email);
+        userAsShipper.setPhone(phone);
+        shipper.setIdCard(idCard);
+        
         try {
             session.saveOrUpdate(userAsShipper);
             session.saveOrUpdate(shipper);
