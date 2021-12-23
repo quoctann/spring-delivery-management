@@ -19,6 +19,11 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#">Đặt đơn</a>
                     </li>
+                    <c:if test="${currentUser.userRole == 'ROLE_ADMIN'}">
+                        <li class="nav-item">
+                            <a class="nav-link" href="<c:url value="/admin" />">Quản lý</a>
+                        </li>
+                    </c:if>
                 </ul>
             </div>
 
