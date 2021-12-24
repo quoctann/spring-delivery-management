@@ -22,7 +22,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 @Entity
-@Table(name = "order")
+@Table(name = "`order`")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Order.findAll", query = "SELECT o FROM Order o"),
@@ -41,6 +41,13 @@ import javax.xml.bind.annotation.XmlTransient;
 public class Order implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    
+    public static final class Status {
+        public static final String PENDING = "PENDING";
+        public static final String SHIPPING = "SHIPPING";
+        public static final String SUCCESS = "SUCCESS";
+        public static final String FAILED = "FAILED";
+    }
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -91,6 +98,9 @@ public class Order implements Serializable {
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "rate_star")
     private Float rateStar;
+    
+    @Column(name = "price")
+    private Integer price;
     
     @OneToMany(mappedBy = "orderId")
     private Set<Auction> auctionSet;
@@ -206,6 +216,14 @@ public class Order implements Serializable {
         this.rateStar = rateStar;
     }
 
+    public Integer getPrice() {
+        return price;
+    }
+
+    public void setPrice(Integer price) {
+        this.price = price;
+    }
+    
     @XmlTransient
     public Set<Auction> getAuctionSet() {
         return auctionSet;

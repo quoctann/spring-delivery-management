@@ -5,6 +5,7 @@ import java.util.Set;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinColumns;
@@ -25,8 +26,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Customer.findAll", query = "SELECT c FROM Customer c"),
     @NamedQuery(name = "Customer.findByCustomerId", query = "SELECT c FROM Customer c WHERE c.customerId = :customerId"),
-    @NamedQuery(name = "Customer.findByAddress", query = "SELECT c FROM Customer c WHERE c.address = :address"),
-    @NamedQuery(name = "Customer.findByIdCard", query = "SELECT c FROM Customer c WHERE c.idCard = :idCard")})
+    @NamedQuery(name = "Customer.findByAddress", query = "SELECT c FROM Customer c WHERE c.address = :address")})
 public class Customer implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -41,11 +41,7 @@ public class Customer implements Serializable {
     @Column(name = "address")
     private String address;
     
-    @Size(max = 50)
-    @Column(name = "id_card")
-    private String idCard;
-    
-    @OneToMany(mappedBy = "customerId")
+    @OneToMany(mappedBy = "customerId", fetch = FetchType.EAGER)
     private Set<Comment> commentSet;
     
     @OneToOne(mappedBy = "customer")
@@ -75,14 +71,6 @@ public class Customer implements Serializable {
 
     public void setAddress(String address) {
         this.address = address;
-    }
-
-    public String getIdCard() {
-        return idCard;
-    }
-
-    public void setIdCard(String idCard) {
-        this.idCard = idCard;
     }
 
     @XmlTransient

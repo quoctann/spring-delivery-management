@@ -7,5 +7,6 @@ import java.util.List;
 public interface UserRepository {
      User getUserById(int id);
      List<User> getUsers(String username);
-     boolean addUser(User user, String userRole);
+     boolean addUser(User user);
+     boolean updateInfo(User user);
 }

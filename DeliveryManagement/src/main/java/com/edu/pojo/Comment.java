@@ -1,6 +1,8 @@
 package com.edu.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,6 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -36,10 +40,16 @@ public class Comment implements Serializable {
     @Column(name = "content")
     private String content;
     
+    @Column(name = "created_date")
+    @Temporal(TemporalType.DATE)
+    private Date createdDate;
+    
+    @JsonIgnore
     @JoinColumn(name = "customer_id", referencedColumnName = "customer_id")
     @ManyToOne
     private Customer customerId;
     
+    @JsonIgnore
     @JoinColumn(name = "shipper_id", referencedColumnName = "shipper_id")
     @ManyToOne
     private Shipper shipperId;
@@ -73,6 +83,14 @@ public class Comment implements Serializable {
 
     public void setCustomerId(Customer customerId) {
         this.customerId = customerId;
+    }
+
+    public Date getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
     }
 
     public Shipper getShipperId() {

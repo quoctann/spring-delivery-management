@@ -8,7 +8,20 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-<c:url value="/login" var="action" />
+<c:url value="/signin" var="action" />
+
+<!--Biến param để lấy các biến param trên url được trả ra từ server-->
+<c:if test="${param.error != null}">
+    <div class="alert alert-danger">
+        Đã có lỗi xảy ra, vui lòng thử lại sau.
+    </div>
+</c:if>
+
+<c:if test="${param.accessDenied != null}">
+    <div class="alert alert-danger">
+        Yêu cầu truy cập bị từ chối!
+    </div>
+</c:if>
 
 <section class="my-5" id="signIn">
     <div class="container">
