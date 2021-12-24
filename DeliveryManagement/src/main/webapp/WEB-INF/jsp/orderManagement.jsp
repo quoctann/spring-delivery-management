@@ -26,7 +26,7 @@
             </div>
             <div class="col-5">
                 <select class="form-select" name="sort" id="sort">
-                    <option selected value="desc">Mới nhất</option>
+                    <option selected value="des">Mới nhất</option>
                     <option value="asc">Cũ nhất</option>
                 </select>
             </div>

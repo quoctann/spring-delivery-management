@@ -49,6 +49,12 @@ public class Order implements Serializable {
         public static final String FAILED = "FAILED";
     }
     
+    public static final class Type {
+        public static final String TYPE1 = "1";
+        public static final String TYPE2 = "2";
+        public static final String TYPE3 = "3";
+    }
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
