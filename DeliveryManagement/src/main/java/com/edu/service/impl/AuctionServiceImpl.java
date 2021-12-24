@@ -9,11 +9,13 @@ import com.edu.pojo.Auction;
 import com.edu.repository.AuctionRepository;
 import com.edu.service.AuctionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  *
  * @author beanp
  */
+@Service
 public class AuctionServiceImpl implements AuctionService {
     
     @Autowired
@@ -22,6 +24,11 @@ public class AuctionServiceImpl implements AuctionService {
     @Override
     public boolean addOrUpdateAuction(Auction auction) {
         return this.auctionRepository.addOrUpdateAuction(auction);
+    }
+
+    @Override
+    public Auction getAuctionByShipperAndOrder(int shipperId, int orderId) {
+        return this.auctionRepository.getAuctionByShipperAndOrder(shipperId, orderId);
     }
     
 }

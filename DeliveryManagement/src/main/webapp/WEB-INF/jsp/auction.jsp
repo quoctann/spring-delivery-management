@@ -71,13 +71,14 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form method="post" action="${action}">
-                            <input id="price" class="input" type="number" step="1000" min="0">
+                        <form:form method="post" action="${action}" modelAttribute="auction">
+                            <form:input path="price" id="price" class="input" type="number" step="1000" min="0" />
                             <label for="price">VND</label>
-                            <input id="orderId" class="input" type="hidden">
+                            <form:input path="orderId" id="orderId" class="input" type="hidden" />
+                            <form:input path="shipperId" id="shipperId" value="${shipper_id}" class="input" type="hidden" />
                             <br>
                             <button class="btn btn-readmore" type="submit">Đấu giá</button>
-                        </form>
+                        </form:form>
                     </div>
                 </div>
             </div>

@@ -44,5 +44,5 @@
          item.innerText = moment(item.innerText).fromNow();
      });
 </script> 
-    <script src="<c:url value='/js/main.js'/>"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
 </html>

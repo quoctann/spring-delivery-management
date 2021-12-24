@@ -9,6 +9,8 @@ import java.util.List;
 import com.edu.pojo.Auction;
 import com.edu.repository.AuctionRepository;
 import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -53,4 +55,26 @@ public class AuctionRepositoryImpl implements AuctionRepository {
             return false;
         }
     };
+
+    @Override
+    public Auction getAuctionByShipperAndOrder(int shipperId, int orderId) {
+        
+          Session session = this.sessionFactory.getObject().getCurrentSession();
+          CriteriaBuilder builder = session.getCriteriaBuilder();
+            CriteriaQuery<Auction> query = builder.createQuery(Auction.class);
+            Root root = query.from(Auction.class);
+            
+            Predicate p1 = builder.equal(root.get("shipperId"), shipperId);
+            Predicate p2 = builder.equal(root.get("orderId"), orderId);
+                      
+            query = query.where(builder.and(p1,p2));
+            
+            Query q = session.createQuery(query);
+           
+           if (q.getResultList().isEmpty()) {
+               return null;
+           } else return (Auction) q.getSingleResult();
+            
+           
+    }
 }

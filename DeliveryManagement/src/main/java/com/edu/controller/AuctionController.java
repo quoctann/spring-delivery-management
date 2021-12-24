@@ -33,30 +33,42 @@ public class AuctionController {
     @Autowired
     private OrderService orderService;
     
-//    @Autowired
-//    private AuctionService auctionService;
+    @Autowired
+    private AuctionService auctionService;
     
     @GetMapping("/auction")
-    public String auction(Model model, @RequestParam(required = false) Map<String, String> params) {
-        
+    public String auction(Model model, HttpSession session, @RequestParam(required = false) Map<String, String> params) {
+        User u = (User) session.getAttribute("currentUser");
         int page = Integer.parseInt(params.getOrDefault("page", "1"));
         String keyword = params.getOrDefault("keyword","");
         String sort = params.getOrDefault("sort","sort");
-      
+        
+        model.addAttribute("auction", new Auction());
         model.addAttribute("orders", this.orderService.getOrder(keyword, page, sort));
         model.addAttribute("count", this.orderService.countOrder());
-        
+        model.addAttribute("shipper_id", u.getId());
         return "auction";
     }
     
     @PostMapping("/auction")
     public String createAuction(Model model, 
             @ModelAttribute(value = "auction") @Valid Auction auction,
-            HttpSession session,
-            BindingResult result) {
-        if (!result.hasErrors()) {
-            User u = (User) session.getAttribute("currentUser");
-        }
+            HttpSession session) {
+        model.addAttribute("orders", this.orderService.getOrder("", 1, ""));
+        model.addAttribute("count", this.orderService.countOrder());
+        
+//        Check Auction đã tồn tại hay chưa ?
+        Auction au = this.auctionService.getAuctionByShipperAndOrder(auction.getShipperId().getShipperId(), auction.getOrderId().getId());
+      
+        if (au != null) {
+            auction.setId(au.getId());
+        }    
+        
+//        if (!result.hasErrors()) {            
+            if(this.auctionService.addOrUpdateAuction(auction) == true) {
+                System.out.println("done");
+            };
+//        };
         return "auction";
     }
 }
