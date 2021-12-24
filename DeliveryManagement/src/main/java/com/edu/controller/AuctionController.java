@@ -43,7 +43,7 @@ public class AuctionController {
         String keyword = params.getOrDefault("keyword","");
         String sort = params.getOrDefault("sort","sort");
       
-        model.addAttribute("orders", this.orderService.getOrder(keyword, page, sort));
+        model.addAttribute("orders", this.orderService.getOrders(keyword, page, sort, null));
         model.addAttribute("count", this.orderService.countOrder());
         
         return "auction";

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.edu.repository.impl;
 
 import com.edu.pojo.Order;
@@ -19,11 +14,6 @@ import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-/**
- *
- * @author beanp
- */
-
 @Repository
 @Transactional
 public class OrderRepositoryImpl implements OrderRepository {
@@ -32,38 +22,55 @@ public class OrderRepositoryImpl implements OrderRepository {
     private LocalSessionFactoryBean sessionFactory;
     
     @Override
-    public List<Order> getOrders(String keyword, int page, String sort) {
-
+    public List<Order> getOrders(String keyword, int page, String sort, String filterType) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
     
         CriteriaBuilder builder = session.getCriteriaBuilder();       
         CriteriaQuery<Order> query = builder.createQuery(Order.class);
         Root root = query.from(Order.class);
         query = query.select(root);
-        
-          
-//        if (!keyword.isBlank()) {
+                  
+        if (keyword != null) {
             String kw = "%" + keyword + "%";
-            Predicate p = builder.like(root.get("description").as(String.class), kw);           
-//        };
+            Predicate p = builder.like(root.get("description").as(String.class), kw); 
+            query = query.where(p);
+        }
         
-            
-        query = query.where(p);
-        System.out.println(sort);
+        if (filterType != null) {
+            switch(filterType) {
+                case Order.Status.PENDING:
+                    query = query.where(builder.equal(root.get("status").as(String.class), Order.Status.PENDING));
+                    break;
+                    
+                case Order.Status.SHIPPING:
+                    query = query.where(builder.equal(root.get("status").as(String.class), Order.Status.SHIPPING));            
+                    break;
+                    
+                case Order.Status.SUCCESS:
+                    query = query.where(builder.equal(root.get("status").as(String.class), Order.Status.SUCCESS));            
+                    break;
+                
+                case Order.Status.FAILED:
+                    query = query.where(builder.equal(root.get("status").as(String.class), Order.Status.FAILED));            
+                    break;
+                    
+                default:
+                    break;
+            }
+        }
+
         if (sort.equals("des")) {
-             System.out.println("in des");
+            //System.out.println("in des");
             query = query.orderBy(builder.desc(root.get("id")));
         }
-        if (sort.equals("asc"))
-        {
-             System.out.println("in asc");
+        if (sort.equals("asc")) {
+            //System.out.println("in asc");
             query = query.orderBy(builder.asc(root.get("id")));
-        };
+        }
         
         Query q = session.createQuery(query);
-        
-        
-        int max = 10;
+        // Phân trang kết quả trả ra
+        int max = 6;
         q.setMaxResults(max);
         q.setFirstResult((page - 1) * max);
         

@@ -52,7 +52,7 @@ function approveShipper(adminId, shipperId) {
 }
 
 
-// Tìm kiếm, filter, phân trang khi các nút được bấm
+// Tìm kiếm, filter, phân trang khi các nút được bấm (ở trang shipper)
 function getAdditionInfo() {   
     let filterType = document.getElementById("filterType").value;
     let username = document.getElementById("search").value;
@@ -69,6 +69,24 @@ function getAdditionInfo() {
     else {
         path += "page=1";
     }
+    
+    window.location.replace(path);
+}
+
+
+// Tìm kiếm, filter, phân trang khi các nút được bấm (ở trang order)
+function getAdditionOrderInfo() {   
+    let filterType = document.getElementById("filterType").value;
+    let description = document.getElementById("search").value;
+    let sort = document.getElementById("sort").value;
+    let page = 1;
+    
+    let path = "/DeliveryManagement/admin/order?";
+    
+    filterType !== null ? path += `filterType=${filterType}&` : null;
+    description !== null ? path += `description=${description}&` : null;
+    sort !== null ? path += `sort=${sort}&` : null;
+    page !== null ? path += `page=${page}` : path += "page=1";
     
     window.location.replace(path);
 }

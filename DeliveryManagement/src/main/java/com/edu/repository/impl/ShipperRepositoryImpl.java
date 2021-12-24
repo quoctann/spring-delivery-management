@@ -109,7 +109,7 @@ public class ShipperRepositoryImpl implements ShipperRepository {
         // Tạo truy vấn
         Query q = session.createQuery(query);
         // Phân trang kết quả
-        int max = 9;
+        int max = 6;
         q.setMaxResults(max);
         q.setFirstResult((page - 1) * max);
         
@@ -191,6 +191,14 @@ public class ShipperRepositoryImpl implements ShipperRepository {
         }
         
         return false;
+    }
+
+    @Override
+    public int countShipper() {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        Query query = session.createQuery("Select COUNT(*) From Order");
+         
+        return Integer.parseInt(query.getSingleResult().toString());
     }
     
 }

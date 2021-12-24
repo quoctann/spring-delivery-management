@@ -9,7 +9,7 @@
         <div class="col-md-6">
             <div class="input-group">
                 <span class="input-group-text"><i class="fas fa-search"></i></span>
-                <input name="search" id="search" type="text" class="form-control" placeholder="Tìm kiếm">
+                <input name="search" id="search" type="text" class="form-control" placeholder="Tìm kiếm theo username">
                 <!--                <input type="submit" value="Tìm" class="btn btn-primary"/>-->
                 <button onclick="getAdditionInfo()" class="btn btn-primary">Tìm</button>
             </div>
@@ -67,7 +67,7 @@
     <!-- Danh sách shipper -->
     <div class="list-shipper row">
         <c:forEach items="${shipperList}" var="i">
-            <div class="p-2 col-xs-12 col-md-3">
+            <div class="p-2 col-xs-12 col-md-4">
                 <div class="card  shadow">
                     <div class="card-body">
                         <c:if test="${i[6] != null}">
@@ -127,14 +127,12 @@
     </div>
 
     <!-- Cụm nút phân trang -->
-    <div class="d-flex justify-content-center my-5">
+    <div class="d-flex justify-content-center my-2">
         <nav>
             <ul class="pagination shadow">
-                <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                <c:forEach begin="1" end="${Math.ceil(shipperCount/6)}" var="count">
+                    <li class="page-item"><a class="page-link" href="<c:url value="/admin/shipper?page=${count}" />">${count}</a></li>
+                </c:forEach>
             </ul>
         </nav>
     </div>
