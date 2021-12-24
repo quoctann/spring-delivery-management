@@ -5,6 +5,7 @@ import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
 import com.edu.formatter.AuctionFormatter;
 import com.edu.formatter.OrderFormatter;
+import com.edu.formatter.ShipperFormatter;
 import com.edu.validator.UsernameValidator;
 import com.edu.validator.WebAppValidator;
 import java.util.HashSet;
@@ -60,6 +61,7 @@ public class WebApplicationContextConfig implements WebMvcConfigurer {
         //registry.addFormatter(new YourFormatter());
         registry.addFormatter(new OrderFormatter());
         registry.addFormatter(new AuctionFormatter());
+        registry.addFormatter(new ShipperFormatter());
     }
 
     // Override validator của webmvcconfig có sẵn, xong khai báo của mình
