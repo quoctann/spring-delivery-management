@@ -1,5 +1,6 @@
 package com.edu.pojo;
 
+import com.edu.service.AuctionService;
 import java.io.Serializable;
 import java.util.Set;
 import javax.persistence.Basic;
@@ -18,6 +19,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @Entity
 @Table(name = "shipper")
@@ -55,7 +57,7 @@ public class Shipper implements Serializable {
     @OneToMany(mappedBy = "shipperId", fetch = FetchType.EAGER)
     private Set<Comment> commentSet;
     
-    @OneToMany(mappedBy = "shipperId")
+    @OneToMany(mappedBy = "shipperId", fetch = FetchType.EAGER)
     private Set<Auction> auctionSet;
     
     @OneToMany(mappedBy = "shipperId")
@@ -134,6 +136,17 @@ public class Shipper implements Serializable {
     public void setOrderSet(Set<Order> orderSet) {
         this.orderSet = orderSet;
     }
+    
+    public Integer getpriceByOrderId(int id) {
+        Set<Auction> aucs = this.auctionSet;
+        
+        for (Auction au: aucs) {
+            if (au.getOrderId().getId() == id) {
+                return au.getPrice();
+            }
+        }
+        return null;
+    };
 
     @Override
     public int hashCode() {

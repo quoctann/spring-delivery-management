@@ -27,5 +27,20 @@ public class OrderServiceImpl implements OrderService {
     public Long countOrder() {
         return this.orderRepository.countOrder();
     }
+
+    @Override
+    public Order getOrderById(int id) {
+        return this.orderRepository.getOrderById(id);
+    }
+
+    @Override
+    public Boolean updateOrder(Order order) {
+        return this.orderRepository.updateOrder(order);
+    }
+
+    @Override
+    public Boolean addOrder(Order order) {
+        return this.orderRepository.addOrder(order);
+    }
     
 }

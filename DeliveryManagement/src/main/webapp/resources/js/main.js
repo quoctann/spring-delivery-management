@@ -17,6 +17,20 @@ btnAuction.forEach((btn)=> {
   }) 
 })
 
+//// Pass data to modal!!!!!
+var btnPick = document.querySelectorAll("#btnPickme");
+var pickInput = document.querySelector("#pickme");
+var price = document.querySelector("#priceFinal");
+
+btnPick.forEach((btn)=> {
+  btn.addEventListener("click", () => {
+    let data = btn.getAttribute("data");
+    let pric = btn.getAttribute("dataP");
+    pickInput.value = data;
+    price.value = pric;
+  })
+  })
+
 
 function showAvatar() {
   var file = document.getElementById("file").files[0];

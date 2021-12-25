@@ -84,4 +84,48 @@ public class OrderRepositoryImpl implements OrderRepository {
          
          return Long.parseLong(query.getSingleResult().toString());
     };
+
+    @Override
+    public Order getOrderById(int id) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();       
+        CriteriaQuery<Order> query = builder.createQuery(Order.class);
+        Root root = query.from(Order.class);
+        
+        query = query.where(builder.equal(root.get("id"),id));
+        
+        Query q = session.createQuery(query);
+        
+        return (Order) q.getSingleResult();
+    }
+
+    @Override
+    public Boolean updateOrder(Order order) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        
+        try {
+            session.update(order);
+            return true;
+        }
+        catch (Exception ex) {
+            System.out.println(ex);
+            return false;
+            
+        }
+    }
+
+    @Override
+    public Boolean addOrder(Order order) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        
+        try {
+            session.save(order);
+            return true;
+        }
+        catch (Exception ex) {
+            System.out.println(ex);
+            return false;
+            
+        }
+    }
 }
