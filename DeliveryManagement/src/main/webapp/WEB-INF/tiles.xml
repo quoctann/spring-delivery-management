@@ -116,10 +116,4 @@
         <put-attribute name="content" value="/WEB-INF/jsp/incomeStat.jsp"/>
     </definition>
     
-    <!-- Trang báo cáo/thống kê tần suất giao hàng -->
-    <definition name="frequencyStat" extends="adminBaseLayout">
-        <put-attribute name="title" value="Thống kê tần suất giao hàng"/>
-        <put-attribute name="content" value="/WEB-INF/jsp/frequencyStat.jsp"/>
-    </definition>
-    
 </tiles-definitions>

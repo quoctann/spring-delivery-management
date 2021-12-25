@@ -47,8 +47,6 @@
                             <option selected value="active">Đang hoạt động</option>
                         </c:when>
                     </c:choose>
-
-
                 </select>
             </div>
             <button onclick="getAdditionInfo()" type="button" class="btn btn-primary col"><i class="fas fa-filter"></i> Lọc</button>

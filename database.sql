@@ -153,7 +153,7 @@ CREATE TABLE `order` (
   KEY `fk_order_customer_idx` (`customer_id`),
   CONSTRAINT `fk_order_customer` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`customer_id`),
   CONSTRAINT `fk_order_shipper` FOREIGN KEY (`shipper_id`) REFERENCES `shipper` (`shipper_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -162,7 +162,7 @@ CREATE TABLE `order` (
 
 LOCK TABLES `order` WRITE;
 /*!40000 ALTER TABLE `order` DISABLE KEYS */;
-INSERT INTO `order` VALUES (1,NULL,2,'2021-10-10 12:00:00',NULL,'PENDING','Do an cho cun','0123456789','123 Lê Lai','99 Nguyễn Trãi','CASH','1','',4,2000000000),(2,3,2,'2021-12-12 10:00:00',NULL,'SHIPPING','Quan ao','0123456789','123 Lê Lai','99 Nguyễn Trãi','CASH','2','',3,198512235),(3,3,2,'2020-10-10 12:00:00',NULL,'FAILED','Van phong pham','0123456789','123 Lê Lai','99 Nguyễn Trãi','CASH','3','',1,1341313456),(4,3,2,'2020-10-10 12:00:00',NULL,'SUCCESS','Thuoc','0123456789','123 Lê Lai','99 Nguyễn Trãi','CASH','4','',2,546556);
+INSERT INTO `order` VALUES (1,NULL,2,'2021-10-10 00:00:00',NULL,'PENDING','Do an cho cun','0123456789','123 Lê Lai','99 Nguyễn Trãi','CASH','1','',4,2000000000),(2,3,2,'2021-12-12 00:00:00',NULL,'SHIPPING','Quan ao','0123456789','123 Lê Lai','99 Nguyễn Trãi','CASH','2','',3,198512235),(3,3,2,'2020-10-10 00:00:00',NULL,'FAILED','Van phong pham','0123456789','123 Lê Lai','99 Nguyễn Trãi','CASH','3','',1,1341313456),(4,3,2,'2020-10-10 00:00:00',NULL,'SUCCESS','Thuoc','0123456789','123 Lê Lai','99 Nguyễn Trãi','CASH','1','',2,546556),(5,3,2,'2020-10-11 00:00:00',NULL,'SUCCESS','Thuc pham','0123456789','123 Lê Lai','99 Nguyễn Trãi','CASH','1','',2,100000),(6,3,2,'2020-10-11 00:00:00',NULL,'SUCCESS','Sua','0123456789','123 Lê Lai','99 Nguyễn Trãi','CASH','1','',2,215000);
 /*!40000 ALTER TABLE `order` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -238,4 +238,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-12-24 13:39:00
+-- Dump completed on 2021-12-24 23:44:26
