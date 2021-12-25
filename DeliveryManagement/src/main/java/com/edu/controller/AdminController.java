@@ -1,6 +1,8 @@
 package com.edu.controller;
 
+import com.edu.pojo.Order;
 import com.edu.pojo.Shipper;
+import com.edu.service.OrderService;
 import com.edu.service.ShipperService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,9 @@ public class AdminController {
     @Autowired
     private ShipperService shipperService;
     
+    @Autowired
+    private OrderService orderService;
+    
     // Trả về view cho người dùng
     
     @GetMapping("")
@@ -32,21 +37,33 @@ public class AdminController {
             @RequestParam(name = "filterType", required = false) String filterType) {
         
         int pageNum;
-        if (page != null) {
-            pageNum = Integer.parseInt(page); 
-        } else {
-            pageNum = 1;
-        }  
+        if (page != null) { pageNum = Integer.parseInt(page); } else { pageNum = 1; }
+        
         List<Object[]> spList = this.shipperService.getShipperList(filterType, username, pageNum);
 
         model.addAttribute("shipperList", spList);
         model.addAttribute("filterType", filterType);
+        model.addAttribute("shipperCount", this.shipperService.countShipper());
         
         return "shipperManagement";
     }
     
     @GetMapping("/order")
-    public String orderManagement() {
+    public String orderManagement(Model model,
+            @RequestParam(name = "description", required = false) String description,
+            @RequestParam(name = "page", required = false) String page,
+            @RequestParam(name = "filterType", required = false) String filterType,
+            @RequestParam(name = "sort", required = false) String sort) {
+        
+        int pageNum = 1;
+        
+        if (page != null) pageNum = Integer.parseInt(page);
+        
+        List<Order> orderList = this.orderService.getOrders(description, pageNum, sort, filterType);
+        
+        model.addAttribute("orderList", orderList);
+        model.addAttribute("orderCount", this.orderService.countOrder());
+        
         return "orderManagement";
     }
     
@@ -61,6 +78,8 @@ public class AdminController {
     }
     
     // Xử lý các request CRUD
+    
+    // Update một phần thông tin của shipper
     @PostMapping("/shipper")
     public String partialUpdateShipperInfo(Model model,
             @RequestParam(name = "id") int id,

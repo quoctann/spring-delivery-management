@@ -27,6 +27,9 @@
                         <li><a class="dropdown-item" href="<c:url value='/admin/frequency-stat'/>">Tần suất giao hàng</a></li>
                     </ul>
                 </li>
+                <li class="nav-item">
+                    <a class="btn btn-outline-light ms-2" href="<c:url value='/logout'/>">Đăng xuất <i class="fas fa-sign-out-alt ms-1"></i></a>
+                </li>
             </ul>
         </div>
     </div>

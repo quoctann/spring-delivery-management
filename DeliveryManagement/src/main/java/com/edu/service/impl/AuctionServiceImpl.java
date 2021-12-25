@@ -8,6 +8,7 @@ package com.edu.service.impl;
 import com.edu.pojo.Auction;
 import com.edu.repository.AuctionRepository;
 import com.edu.service.AuctionService;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,6 +30,11 @@ public class AuctionServiceImpl implements AuctionService {
     @Override
     public Auction getAuctionByShipperAndOrder(int shipperId, int orderId) {
         return this.auctionRepository.getAuctionByShipperAndOrder(shipperId, orderId);
+    }
+
+    @Override
+    public List<Auction> getAuctionsByOrderId(int id) {
+        return this.auctionRepository.getAuctionsByOrderId(id);
     }
     
 }

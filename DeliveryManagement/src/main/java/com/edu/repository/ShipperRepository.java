@@ -12,4 +12,5 @@ public interface ShipperRepository {
     boolean activateShipper(int shipperId);
     boolean approveShipper(int adminId, int shipperId);
     boolean partialUpdateByAdmin(int shipperId, String email, String phone, String idCard);
+    int countShipper();
 }

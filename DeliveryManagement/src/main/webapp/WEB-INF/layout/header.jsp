@@ -14,10 +14,10 @@
                         <a class="nav-link active" href="<c:url value="/" />">Trang chủ</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Nhân viên</a>
+                        <a class="nav-link" href="<c:url value="/shipperList" />">Nhân viên</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Đặt đơn</a>
+                        <a class="nav-link" href="<c:url value="/createOrder" />">Đặt đơn</a>
                     </li>
                     <c:if test="${currentUser.userRole == 'ROLE_ADMIN'}">
                         <li class="nav-item">

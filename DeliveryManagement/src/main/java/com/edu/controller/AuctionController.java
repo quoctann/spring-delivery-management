@@ -42,9 +42,10 @@ public class AuctionController {
         int page = Integer.parseInt(params.getOrDefault("page", "1"));
         String keyword = params.getOrDefault("keyword","");
         String sort = params.getOrDefault("sort","sort");
-        
+      
         model.addAttribute("auction", new Auction());
-        model.addAttribute("orders", this.orderService.getOrder(keyword, page, sort));
+        
+        model.addAttribute("orders", this.orderService.getOrders(keyword, page, sort, null));
         model.addAttribute("count", this.orderService.countOrder());
         model.addAttribute("shipper_id", u.getId());
         return "auction";
@@ -54,7 +55,7 @@ public class AuctionController {
     public String createAuction(Model model, 
             @ModelAttribute(value = "auction") @Valid Auction auction,
             HttpSession session) {
-        model.addAttribute("orders", this.orderService.getOrder("", 1, ""));
+        model.addAttribute("orders", this.orderService.getOrders("", 1, "", null));
         model.addAttribute("count", this.orderService.countOrder());
         
 //        Check Auction đã tồn tại hay chưa ?

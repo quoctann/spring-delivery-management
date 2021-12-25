@@ -4,8 +4,10 @@ package com.edu.configs;
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
 import com.edu.formatter.AuctionFormatter;
+import com.edu.formatter.CustomerFormatter;
 import com.edu.formatter.OrderFormatter;
 import com.edu.formatter.ShipperFormatter;
+import com.edu.formatter.UserFormatter;
 import com.edu.validator.UsernameValidator;
 import com.edu.validator.WebAppValidator;
 import java.util.HashSet;
@@ -62,6 +64,8 @@ public class WebApplicationContextConfig implements WebMvcConfigurer {
         registry.addFormatter(new OrderFormatter());
         registry.addFormatter(new AuctionFormatter());
         registry.addFormatter(new ShipperFormatter());
+        registry.addFormatter(new UserFormatter());
+        registry.addFormatter(new CustomerFormatter());
     }
 
     // Override validator của webmvcconfig có sẵn, xong khai báo của mình
