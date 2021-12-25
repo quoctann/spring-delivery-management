@@ -241,6 +241,17 @@ ul > li {
           box-shadow: none;
 }
 
+#goodType {
+  width: 28%;
+  margin-left: 8px;
+}
+
+#goodType:focus {
+  outline: none;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
 .btnSignIn {
   padding: 7px 16px;
   margin: 8px;
@@ -773,7 +784,7 @@ ul > li {
 
 .banner .banner-background {
   position: relative;
-  background-image: url("DeliveryManagement/images/banner.jpg");
+  background-image: url("/images/banner.jpg");
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -947,4 +958,30 @@ ul > li {
 #auction form {
   text-align: center;
 }
-/*# sourceMappingURL=main.css.map */
+
+#orderDetail .detail span {
+  width: 240px;
+  display: inline-block;
+  font-weight: 700 !important;
+}
+
+#orderDetail .shipperList table {
+  vertical-align: middle;
+}
+
+#orderDetail .shipperList table span {
+  float: right;
+}
+
+#orderDetail .shipperList .fa-star {
+  color: #ffb74d;
+}
+
+#orderDetail .btn-pick {
+  float: right;
+}
+
+#orderDetail .modal .btn-submit-form {
+  margin-top: 8px;
+  margin-bottom: 8px;
+}

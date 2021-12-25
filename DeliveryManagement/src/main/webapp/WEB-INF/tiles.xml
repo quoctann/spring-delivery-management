@@ -53,6 +53,18 @@
         <put-attribute name="content" value="/WEB-INF/jsp/shipperDetail.jsp" />
     </definition>
     
+    <!-- Trang chi tiết đơn hàng -->
+    <definition name="orderDetail" extends="baseLayout">
+        <put-attribute name="title" value="Chi tiết đơn hàng" />
+        <put-attribute name="content" value="/WEB-INF/jsp/orderDetail.jsp" />
+    </definition>
+    
+    <!-- Trang đặt đơn -->
+    <definition name="createOrder" extends="baseLayout">
+        <put-attribute name="title" value="Đặt đơn" />
+        <put-attribute name="content" value="/WEB-INF/jsp/createOrder.jsp" />
+    </definition>
+    
     <!-- Trang lỗi 404 Not Found -->
     <definition name="404" extends="baseLayout">
         <put-attribute name="title" value="Không tìm thấy trang" />

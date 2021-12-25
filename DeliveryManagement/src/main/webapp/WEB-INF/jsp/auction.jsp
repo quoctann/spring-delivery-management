@@ -71,7 +71,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form:form method="post" action="${action}" modelAttribute="auction">
+                        <form:form method="post" action="${action}" modelAttribute="auction" >
                             <form:input path="price" id="price" class="input" type="number" step="1000" min="0" />
                             <label for="price">VND</label>
                             <form:input path="orderId" id="orderId" class="input" type="hidden" />
