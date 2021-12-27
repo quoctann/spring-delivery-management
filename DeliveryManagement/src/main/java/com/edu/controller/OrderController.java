@@ -91,7 +91,7 @@ public class OrderController {
     public String createOrderView(Model model, HttpSession session, @ModelAttribute(value = "order") @Valid Order order) {
         User u = (User) session.getAttribute("currentUser");
         order.setCustomerId(this.customerService.getCustomerById(u.getId()));
-        
+        order.setStatus("PENDING");
          if (this.orderService.addOrder(order) == true) {
             return "createOrder";
         } else return "404";
