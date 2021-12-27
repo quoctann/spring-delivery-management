@@ -25,4 +25,14 @@ public class ApiRatingController {
         
         return HttpStatus.BAD_REQUEST;
     }
+//    
+//    @PutMapping("order-status/{id}")
+//    public HttpStatus updateStatust(@RequestParam(name = "status", required=true) String status,
+//            @PathVariable(value = "id") String orderId) {
+//        
+//        if (this.orderService.updateStatus(Integer.parseInt(orderId), status))
+//            return HttpStatus.OK;
+//        
+//        return HttpStatus.BAD_REQUEST;
+//    }
 }

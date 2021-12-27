@@ -40,7 +40,7 @@
                         </c:if>
                         <c:if test="${currentUser.avatar != null}">
                             <div class="current-user-avatar col-2">
-                                <img class="avatar w-100 h-100" src="${userAsShipperInfo.avatar}" alt="nothing">
+                                <img class="avatar w-100 h-100" src="${currentUser.avatar}" alt="nothing">
                             </div>
                         </c:if>
 
@@ -49,7 +49,7 @@
                             <button 
                                 class="btn btn-readmore" 
                                 type="button" 
-                                onclick="addComment(${shipperInfo.shipperId}, '${userAsShipperInfo.firstName}', '${userAsShipperInfo.lastName}', '${userAsShipperInfo.avatar}' )"
+                                onclick="addComment(${shipperInfo.shipperId}, '${currentUser.firstName}', '${currentUser.lastName}', '${currentUser.avatar}' )"
                             >Bình luận</button>
                         </form>
                     </div>

@@ -52,5 +52,10 @@ public class OrderServiceImpl implements OrderService {
     public Boolean rateOrder(int orderId, int value) {
         return this.orderRepository.rateOrder(orderId, value);
     }
+
+    @Override
+    public Boolean updateStatus(int orderId, String status) {
+        return this.orderRepository.updateStatus(orderId, status);
+    }
     
 }

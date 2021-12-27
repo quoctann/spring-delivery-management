@@ -185,4 +185,20 @@ public class OrderRepositoryImpl implements OrderRepository {
         return false;
     }
 
+    @Override
+    public Boolean updateStatus(int orderId, String status) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        Order order = session.get(Order.class, orderId);
+        order.setStatus(status);
+        
+        try {
+            session.update(order);
+            return true;
+        } catch (HibernateException ex) {
+            ex.printStackTrace();
+        }
+        
+        return false;
+    }
+
 }

@@ -58,9 +58,8 @@
                 <h3 class="pt-3 ps-3">Cập nhật trạng thái đơn hàng</h3>
                 <div class="card-body d-flex justify-content-center">
                     <div class="btn-group" role="group">
-                        <button type="button" class="btn btn-outline-primary">Đang giao hàng</button>
-                        <button type="button" class="btn btn-outline-primary">Đã giao thành công</button>
-                        <button type="button" class="btn btn-outline-primary">Hủy đơn hàng</button>
+                        <button onclick="updateStatus(${order.id}, 'SUCCESS')" type="button" class="btn btn-outline-primary">Đã giao thành công</button>
+                        <button onclick="updateStatus(${order.id}, 'FAILED')" type="button" class="btn btn-outline-primary">Hủy đơn hàng</button>
                     </div>
                 </div>
             </div>

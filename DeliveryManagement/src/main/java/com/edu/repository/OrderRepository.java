@@ -11,4 +11,5 @@ public interface OrderRepository {
     Boolean updateOrder(Order order);
     Boolean addOrder(Order order);
     Boolean rateOrder(int orderId, int value);
+    Boolean updateStatus(int orderId, String status);
 }

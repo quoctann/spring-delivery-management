@@ -201,3 +201,26 @@ function rate(orderId) {
             alert("Lỗi không xác định, mã lỗi: ", data);
     });
 }
+
+function updateStatus(orderId, status) {
+    
+    if (orderId === null || status === null) {
+        alert("Không hợp lệ");
+        return;
+    }
+    
+    fetch(`/DeliveryManagement/order-status/${orderId}?status=${status}`, {
+      method: "put"  
+    }).then(function(res) {
+        return res.status;
+    })
+    .then(function(data) {
+        if (data === 200) {
+            alert("Cập nhật thành công!")
+            window.location.reload();
+        } else if (data === 500)
+            alert("Lỗi server!")
+        else
+            alert("Lỗi không xác định, mã lỗi: ", data);
+    });
+}
