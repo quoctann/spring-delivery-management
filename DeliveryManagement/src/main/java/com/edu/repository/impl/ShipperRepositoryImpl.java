@@ -196,7 +196,7 @@ public class ShipperRepositoryImpl implements ShipperRepository {
     @Override
     public int countShipper() {
         Session session = this.sessionFactory.getObject().getCurrentSession();
-        Query query = session.createQuery("Select COUNT(*) From Order");
+        Query query = session.createQuery("Select COUNT(*) From Shipper");
          
         return Integer.parseInt(query.getSingleResult().toString());
     }

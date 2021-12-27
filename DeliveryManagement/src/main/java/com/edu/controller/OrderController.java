@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.edu.controller;
 
 import com.edu.pojo.Auction;
@@ -14,8 +9,8 @@ import com.edu.service.CustomerService;
 import com.edu.service.OrderService;
 import com.edu.service.ShipperService;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
-import java.util.Map;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,13 +20,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-
-/**
- *
- * @author beanp
- */
 
 @Controller
 public class OrderController {
@@ -49,7 +37,7 @@ public class OrderController {
     private OrderService orderService;
     
     @GetMapping("/orderDetail/{id}")
-    public String orderDetailView(Model model, @PathVariable int id) {
+    public String orderDetailView(Model model, @PathVariable int id, HttpSession session) {
         List<Auction> aus = this.auctionService.getAuctionsByOrderId(id);
         
         List<Shipper> shippers = new ArrayList<Shipper>();
@@ -61,13 +49,16 @@ public class OrderController {
         model.addAttribute("order", this.orderService.getOrderById(id));
         model.addAttribute("shippers", shippers);
         
+        User current = (User) session.getAttribute("currentUser");
+        if (current.getUserRole().equals(User.ROLE_SHIPPER))
+            return "shipperOrderDetail";
+        
         return "orderDetail";
     }; 
     
     @PostMapping("/orderDetail/{id}")
     public String updateOrder(Model model, @PathVariable int id, @ModelAttribute(value = "order") @Valid Order order) {
-        
-        
+                
         order.setStatus("SHIPPING");
         order.setCreatedDate(this.orderService.getOrderById(id).getCreatedDate());
         
@@ -91,12 +82,13 @@ public class OrderController {
     public String createOrderView(Model model, HttpSession session, @ModelAttribute(value = "order") @Valid Order order) {
         User u = (User) session.getAttribute("currentUser");
         order.setCustomerId(this.customerService.getCustomerById(u.getId()));
+        order.setStatus(Order.Status.PENDING);
+        order.setPaymentMethod("CASH");
+        order.setCreatedDate(new Date());
         
-         if (this.orderService.addOrder(order) == true) {
+        if (this.orderService.addOrder(order) == true) {
             return "createOrder";
-        } else return "404";
-         
-        
+        } else return "404";                 
     }; 
     
 }

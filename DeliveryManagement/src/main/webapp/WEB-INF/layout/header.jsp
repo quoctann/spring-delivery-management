@@ -14,11 +14,13 @@
                         <a class="nav-link active" href="<c:url value="/" />">Trang chủ</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<c:url value="/shipperList" />">Nhân viên</a>
+                        <a class="nav-link" href="<c:url value="/shipperList" />">Danh sách shipper</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="<c:url value="/createOrder" />">Đặt đơn</a>
-                    </li>
+                    <c:if test="${currentUser.userRole == 'ROLE_CUSTOMER'}">
+                        <li class="nav-item">
+                            <a class="nav-link" href="<c:url value="/createOrder" />">Đặt đơn</a>
+                        </li>
+                    </c:if>
                     <c:if test="${currentUser.userRole == 'ROLE_ADMIN'}">
                         <li class="nav-item">
                             <a class="nav-link" href="<c:url value="/admin" />">Quản lý</a>
@@ -68,8 +70,6 @@
                                 <li><a class="dropdown-item" href="<c:url value="/admin/info" />">Thông tin tài khoản</a></li>
                             </c:when>
                         </c:choose>
-
-                        <li><a class="dropdown-item" href="#">Lịch sử đơn hàng</a></li>
                         <li><a class="dropdown-item" href="<c:url value="/logout" />">Đăng xuất</a></li>
                     </ul>
                 </div>

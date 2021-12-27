@@ -3,7 +3,9 @@ package com.edu.controller;
 import com.edu.pojo.Customer;
 import com.edu.pojo.User;
 import com.edu.service.CustomerService;
+import com.edu.service.OrderService;
 import com.edu.service.UserService;
+import java.util.Map;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/customer")
@@ -23,21 +26,38 @@ public class CustomerController {
     @Autowired
     private UserService userDetailsService;
     
+    @Autowired
+    private OrderService orderService;
+    
     @GetMapping("/info")
-    public String info(Model model, HttpSession session) {
+    public String info(Model model, HttpSession session,
+            @RequestParam(name = "page", required = false) String page) {
+        
+        int pageNum = 1;
+        if (page != null) pageNum = Integer.parseInt(page);
+        
         User u = (User) session.getAttribute("currentUser");
         Customer c = this.customerService.getCustomerById(u.getId());
+        
         model.addAttribute("address", c.getAddress());
+        model.addAttribute("orders", this.orderService.getUserOrders(u.getId(), u.getUserRole(), pageNum));
         
         return "customerProfile";
     }
     
     // Giống ở trên thôi, làm để reload trang không lỗi
     @GetMapping("/user-info")
-    public String userInfo(Model model, HttpSession session) {
+    public String userInfo(Model model, HttpSession session,
+            @RequestParam(name = "page", required = false) String page) {
+        
+        int pageNum = 1;
+        if (page != null) pageNum = Integer.parseInt(page);
+        
         User u = (User) session.getAttribute("currentUser");
         Customer c = this.customerService.getCustomerById(u.getId());
+        
         model.addAttribute("address", c.getAddress());
+        model.addAttribute("orders", this.orderService.getUserOrders(u.getId(), u.getUserRole(), pageNum));
         
         return "customerProfile";
     }

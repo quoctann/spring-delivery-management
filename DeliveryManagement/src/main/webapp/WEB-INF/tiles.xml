@@ -53,10 +53,16 @@
         <put-attribute name="content" value="/WEB-INF/jsp/shipperDetail.jsp" />
     </definition>
     
-    <!-- Trang chi tiết đơn hàng -->
+    <!-- Trang chi tiết đơn hàng (cho customer) -->
     <definition name="orderDetail" extends="baseLayout">
         <put-attribute name="title" value="Chi tiết đơn hàng" />
         <put-attribute name="content" value="/WEB-INF/jsp/orderDetail.jsp" />
+    </definition>
+    
+    <!-- Trang chi tiết đơn hàng (cho shipper) -->
+    <definition name="shipperOrderDetail" extends="baseLayout">
+        <put-attribute name="title" value="Chi tiết đơn hàng" />
+        <put-attribute name="content" value="/WEB-INF/jsp/shipperOrderDetail.jsp" />
     </definition>
     
     <!-- Trang đặt đơn -->

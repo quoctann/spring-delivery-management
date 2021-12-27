@@ -2,7 +2,7 @@ package com.edu.controller;
 
 import com.edu.pojo.Shipper;
 import com.edu.pojo.User;
-import com.edu.service.CustomerService;
+import com.edu.service.OrderService;
 import com.edu.service.ShipperService;
 import com.edu.service.UserService;
 import javax.servlet.http.HttpSession;
@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/shipper")
@@ -24,12 +25,23 @@ public class ShipperController {
     @Autowired
     private UserService userDetailsService;
     
+    @Autowired
+    private OrderService orderService;
+    
     @GetMapping("/info")
-    public String info(Model model, HttpSession session) {
+    public String info(Model model, HttpSession session,
+            @RequestParam(name = "page", required = false) String page) {
+        
+        int pageNum = 1;
+        if (page != null) pageNum = Integer.parseInt(page);
+        
         User u = (User) session.getAttribute("currentUser");
         Shipper s = this.shipperService.getShipperById(u.getId());
+        
         model.addAttribute("idCard", s.getIdCard());
         model.addAttribute("avgRating", s.getAvgRating());
+        model.addAttribute("orders", this.orderService.getUserOrders(u.getId(), u.getUserRole(), pageNum));
+        
         return "shipperProfile";
     }
     
@@ -40,6 +52,7 @@ public class ShipperController {
         Shipper s = this.shipperService.getShipperById(u.getId());
         model.addAttribute("idCard", s.getIdCard());
         model.addAttribute("avgRating", s.getAvgRating());
+        
         return "shipperProfile";
     }
     
@@ -87,6 +100,6 @@ public class ShipperController {
         model.addAttribute("idCard", shipper.getIdCard());
         model.addAttribute("avgRating", shipper.getAvgRating());
         
-        return "customerProfile";
+        return "shipperProfile";
     }
 }

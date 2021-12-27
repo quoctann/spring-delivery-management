@@ -42,5 +42,15 @@ public class OrderServiceImpl implements OrderService {
     public Boolean addOrder(Order order) {
         return this.orderRepository.addOrder(order);
     }
+
+    @Override
+    public List<Order> getUserOrders(int userId, String role, int page) {
+        return this.orderRepository.getUserOrders(userId, role, page);
+    }
+
+    @Override
+    public Boolean rateOrder(int orderId, int value) {
+        return this.orderRepository.rateOrder(orderId, value);
+    }
     
 }

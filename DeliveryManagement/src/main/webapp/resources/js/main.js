@@ -154,13 +154,13 @@ function addComment(shipperId, firstName, lastName, avatar) {
     }).then(function(res) {
         return res.json();
     }).then(function(data) {
-        console.log(data)
+        console.log(data);
         let area = document.getElementById("commentBox");
         if (avatar === null || avatar === "") {
             avatar = "/DeliveryManagement/images/default.jpg";
         }
         date = new Date(data.createdDate);
-        createdDate = moment(date).fromNow()
+        createdDate = moment(date).fromNow();
         area.innerHTML = `
         <div class="comment-item row col-12">
             <div class="current-user-avatar col-2">
@@ -174,5 +174,30 @@ function addComment(shipperId, firstName, lastName, avatar) {
             </div>
         </div>
         ` + area.innerHTML;
+    });
+}
+
+
+// Khách hàng đánh giá đơn hàng
+function rate(orderId) {
+    let value = document.getElementById("rating").value;
+    if (orderId === null || value === null) {
+        alert("Không hợp lệ");
+        return;
+    }
+    
+    fetch(`/DeliveryManagement/rate-order/${orderId}?value=${value}`, {
+      method: "put"  
+    }).then(function(res) {
+        return res.status;
     })
+    .then(function(data) {
+        if (data === 200) {
+            alert("Đánh giá thành công!")
+            window.location.reload();
+        } else if (data === 500)
+            alert("Lỗi server!")
+        else
+            alert("Lỗi không xác định, mã lỗi: ", data);
+    });
 }
