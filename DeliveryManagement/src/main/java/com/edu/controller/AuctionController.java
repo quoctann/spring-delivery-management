@@ -1,6 +1,7 @@
 package com.edu.controller;
 
 import com.edu.pojo.Auction;
+import com.edu.pojo.Order;
 import com.edu.pojo.User;
 import com.edu.service.AuctionService;
 import com.edu.service.OrderService;
@@ -25,7 +26,7 @@ public class AuctionController {
     @Autowired
     private AuctionService auctionService;
     
-    @GetMapping("/auction")
+    @GetMapping("/shipper/auction")
     public String auction(Model model, HttpSession session, @RequestParam(required = false) Map<String, String> params) {
         User u = (User) session.getAttribute("currentUser");
         int page = Integer.parseInt(params.getOrDefault("page", "1"));
@@ -34,13 +35,13 @@ public class AuctionController {
       
         model.addAttribute("auction", new Auction());
         
-        model.addAttribute("orders", this.orderService.getOrders(keyword, page, sort, null));
+        model.addAttribute("orders", this.orderService.getOrders(keyword, page, sort, Order.Status.PENDING));
         model.addAttribute("count", this.orderService.countOrder());
         model.addAttribute("shipper_id", u.getId());
         return "auction";
     }
     
-    @PostMapping("/auction")
+    @PostMapping("/shipper/auction")
     public String createAuction(Model model, 
             @ModelAttribute(value = "auction") @Valid Auction auction,
             HttpSession session) {

@@ -52,5 +52,10 @@ public class ShipperServiceImpl implements ShipperService {
     public int countShipper() {
         return this.shipperRepository.countShipper();
     }
+
+    @Override
+    public List<Object[]> getShippers(String keyword, int page, String sort) {
+        return this.shipperRepository.getShippers(keyword, page, sort);
+    }
     
 }

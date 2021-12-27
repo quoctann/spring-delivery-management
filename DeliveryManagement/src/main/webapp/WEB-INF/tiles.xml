@@ -35,6 +35,12 @@
         <put-attribute name="content" value="/WEB-INF/jsp/customerProfile.jsp" />
     </definition>
     
+    <!-- Trang danh sách shipper -->
+    <definition name="shipperList" extends="baseLayout">
+        <put-attribute name="title" value="Danh sách shipper" />
+        <put-attribute name="content" value="/WEB-INF/jsp/shipperList.jsp" />
+    </definition>
+    
     <!-- Trang thông tin shipper -->
     <definition name="shipperProfile" extends="baseLayout">
         <put-attribute name="title" value="Thông tin shipper" />
@@ -53,10 +59,16 @@
         <put-attribute name="content" value="/WEB-INF/jsp/shipperDetail.jsp" />
     </definition>
     
-    <!-- Trang chi tiết đơn hàng -->
+    <!-- Trang chi tiết đơn hàng (cho customer) -->
     <definition name="orderDetail" extends="baseLayout">
         <put-attribute name="title" value="Chi tiết đơn hàng" />
         <put-attribute name="content" value="/WEB-INF/jsp/orderDetail.jsp" />
+    </definition>
+    
+    <!-- Trang chi tiết đơn hàng (cho shipper) -->
+    <definition name="shipperOrderDetail" extends="baseLayout">
+        <put-attribute name="title" value="Chi tiết đơn hàng" />
+        <put-attribute name="content" value="/WEB-INF/jsp/shipperOrderDetail.jsp" />
     </definition>
     
     <!-- Trang đặt đơn -->

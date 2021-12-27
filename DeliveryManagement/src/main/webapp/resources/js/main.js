@@ -3,7 +3,7 @@
 window.onload = function() {
   let preloader = document.querySelector(".preloader");
   preloader.style.display = "none";
-}
+};
 
 // Pass data to modal
 var modalInput = document.querySelector("#price");
@@ -14,8 +14,8 @@ btnAuction.forEach((btn)=> {
     console.log(btn);
     let data = btn.getAttribute("data");
     hiddenInput.value = data;
-  }) 
-})
+  }) ;
+});
 
 //// Pass data to modal!!!!!
 var btnPick = document.querySelectorAll("#btnPickme");
@@ -28,9 +28,19 @@ btnPick.forEach((btn)=> {
     let pric = btn.getAttribute("dataP");
     pickInput.value = data;
     price.value = pric;
-  })
-  })
+  });
+  });
 
+//// Pass data to modal!!!!!
+var btnStatus = document.querySelectorAll("#btnStatus");
+console.log(pickInput);
+btnStatus.forEach((btn)=> {
+  btn.addEventListener("click", () => {
+      console.log(pickInput);
+    let data = btn.getAttribute("data");
+    pickInput.value = data;
+  });
+  });
 
 function showAvatar() {
   var file = document.getElementById("file").files[0];
@@ -154,13 +164,13 @@ function addComment(shipperId, firstName, lastName, avatar) {
     }).then(function(res) {
         return res.json();
     }).then(function(data) {
-        console.log(data)
+        console.log(data);
         let area = document.getElementById("commentBox");
         if (avatar === null || avatar === "") {
             avatar = "/DeliveryManagement/images/default.jpg";
         }
         date = new Date(data.createdDate);
-        createdDate = moment(date).fromNow()
+        createdDate = moment(date).fromNow();
         area.innerHTML = `
         <div class="comment-item row col-12">
             <div class="current-user-avatar col-2">
@@ -174,5 +184,53 @@ function addComment(shipperId, firstName, lastName, avatar) {
             </div>
         </div>
         ` + area.innerHTML;
+    });
+}
+
+
+// Khách hàng đánh giá đơn hàng
+function rate(orderId) {
+    let value = document.getElementById("rating").value;
+    if (orderId === null || value === null) {
+        alert("Không hợp lệ");
+        return;
+    }
+    
+    fetch(`/DeliveryManagement/rate-order/${orderId}?value=${value}`, {
+      method: "put"  
+    }).then(function(res) {
+        return res.status;
     })
+    .then(function(data) {
+        if (data === 200) {
+            alert("Đánh giá thành công!")
+            window.location.reload();
+        } else if (data === 500)
+            alert("Lỗi server!")
+        else
+            alert("Lỗi không xác định, mã lỗi: ", data);
+    });
+}
+
+function updateStatus(orderId, status) {
+    
+    if (orderId === null || status === null) {
+        alert("Không hợp lệ");
+        return;
+    }
+    
+    fetch(`/DeliveryManagement/order-status/${orderId}?status=${status}`, {
+      method: "put"  
+    }).then(function(res) {
+        return res.status;
+    })
+    .then(function(data) {
+        if (data === 200) {
+            alert("Cập nhật thành công!")
+            window.location.reload();
+        } else if (data === 500)
+            alert("Lỗi server!")
+        else
+            alert("Lỗi không xác định, mã lỗi: ", data);
+    });
 }

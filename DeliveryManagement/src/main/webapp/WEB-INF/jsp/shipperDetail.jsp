@@ -1,15 +1,8 @@
-<%-- 
-    Document   : shipperProfile
-    Created on : Dec 20, 2021, 8:09:23 PM
-    Author     : beanp
---%>
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-
-<!-- Profile -->
+<!-- Profile shipper -->
 <section id="profile">
     <div class="container my-5">
         <div class="row">
@@ -47,7 +40,7 @@
                         </c:if>
                         <c:if test="${currentUser.avatar != null}">
                             <div class="current-user-avatar col-2">
-                                <img class="avatar w-100 h-100" src="${userAsShipperInfo.avatar}" alt="nothing">
+                                <img class="avatar w-100 h-100" src="${currentUser.avatar}" alt="nothing">
                             </div>
                         </c:if>
 
@@ -56,7 +49,7 @@
                             <button 
                                 class="btn btn-readmore" 
                                 type="button" 
-                                onclick="addComment(${shipperInfo.shipperId}, '${userAsShipperInfo.firstName}', '${userAsShipperInfo.lastName}', '${userAsShipperInfo.avatar}' )"
+                                onclick="addComment(${shipperInfo.shipperId}, '${currentUser.firstName}', '${currentUser.lastName}', '${currentUser.avatar}' )"
                             >Bình luận</button>
                         </form>
                     </div>

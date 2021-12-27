@@ -55,11 +55,7 @@ public class UserController {
         return "signup";
     }
 
-//    @GetMapping("profile")
-//    public String profile() {
-//        return "profile";
-//    }
-      // Xử lý post request tạo tài khoản (đăng ký)
+    // Xử lý post request tạo tài khoản (đăng ký)
     @PostMapping("signup")
     public String signUp(Model model, 
             @ModelAttribute(value = "user") @Valid User user,
@@ -70,10 +66,7 @@ public class UserController {
                 !user.getPassword().equals(user.getConfirmPassword())) {
                 model.addAttribute("passwordNotMatch", "Nhap lai mat khau khong dung!");
             } 
-            
-            
             else {
-                
                 List<User> checkUsername = this.userDetailsService.getUsers(user.getUsername());
                 
                 if (!checkUsername.isEmpty()) {

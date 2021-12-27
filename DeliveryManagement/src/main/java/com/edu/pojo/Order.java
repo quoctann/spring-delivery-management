@@ -103,7 +103,7 @@ public class Order implements Serializable {
     
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "rate_star")
-    private Float rateStar;
+    private Integer rateStar;
     
     @Column(name = "price")
     private Integer price;
@@ -214,11 +214,11 @@ public class Order implements Serializable {
         this.transactionId = transactionId;
     }
 
-    public Float getRateStar() {
+    public Integer getRateStar() {
         return rateStar;
     }
 
-    public void setRateStar(Float rateStar) {
+    public void setRateStar(Integer rateStar) {
         this.rateStar = rateStar;
     }
 

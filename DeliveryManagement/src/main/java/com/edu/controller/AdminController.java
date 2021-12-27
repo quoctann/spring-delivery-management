@@ -1,7 +1,6 @@
 package com.edu.controller;
 
 import com.edu.pojo.Order;
-import com.edu.pojo.Shipper;
 import com.edu.service.OrderService;
 import com.edu.service.ShipperService;
 import com.edu.service.StatisticService;
