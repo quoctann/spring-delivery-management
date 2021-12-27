@@ -1,10 +1,14 @@
 package com.edu.controller;
 
 import com.edu.pojo.Order;
-import com.edu.pojo.Shipper;
 import com.edu.service.OrderService;
 import com.edu.service.ShipperService;
+import com.edu.service.StatisticService;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,6 +26,9 @@ public class AdminController {
     
     @Autowired
     private OrderService orderService;
+    
+    @Autowired
+    private StatisticService statisticService;
     
     // Trả về view cho người dùng
     
@@ -68,13 +75,31 @@ public class AdminController {
     }
     
     @GetMapping("/income-stat")
-    public String incomeStat() {
+    public String incomeStat(Model model,
+            @RequestParam(required = false) Map<String, String> params) throws ParseException {        
+        
+        SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd");
+        Date fromDate = null, toDate = null;
+        String type = params.getOrDefault("type", null);
+        
+        // Để khi gửi dữ liệu null nó vẫn không dừng chương trình
+        try {
+            String from = params.getOrDefault("fromDate", null);
+            if (from != null) {
+                fromDate = f.parse(from);
+            }
+            
+            String to = params.getOrDefault("toDate", null);
+            if (to != null) {
+                toDate = f.parse(to);
+            }
+        } catch (ParseException ex) {
+            ex.printStackTrace();
+        }
+        
+        model.addAttribute("incomeData", this.statisticService.incomeStatistic(fromDate, toDate, type));
+        
         return "incomeStat";
-    }
-    
-    @GetMapping("/frequency-stat")
-    public String frequencyStat() {
-        return "frequencyStat";
     }
     
     // Xử lý các request CRUD

@@ -68,9 +68,13 @@
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
-            <artifactId>spring-context-support</artifactId>
-            <version>4.3.29.RELEASE</version>
-            <type>jar</type>
+            <artifactId>spring-core</artifactId>
+            <version>5.3.8</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-beans</artifactId>
+            <version>5.3.8</version>
         </dependency>
         <dependency>
             <groupId>javax</groupId>

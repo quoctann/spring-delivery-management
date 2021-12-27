@@ -18,15 +18,10 @@
                 <li class="nav-item">
                     <a class="nav-link" href="<c:url value='/admin/order'/>">Đơn hàng</a>
                 </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Thống kê
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <li><a class="dropdown-item" href="<c:url value='/admin/income-stat'/>">Doanh thu</a></li>
-                        <li><a class="dropdown-item" href="<c:url value='/admin/frequency-stat'/>">Tần suất giao hàng</a></li>
-                    </ul>
+                <li class="nav-item">
+                    <a class="nav-link" href="<c:url value='/admin/income-stat'/>">Thống kê</a>
                 </li>
+                
                 <li class="nav-item">
                     <a class="btn btn-outline-light ms-2" href="<c:url value='/logout'/>">Đăng xuất <i class="fas fa-sign-out-alt ms-1"></i></a>
                 </li>

@@ -59,10 +59,16 @@
         <put-attribute name="content" value="/WEB-INF/jsp/shipperDetail.jsp" />
     </definition>
     
-    <!-- Trang chi tiết đơn hàng -->
+    <!-- Trang chi tiết đơn hàng (cho customer) -->
     <definition name="orderDetail" extends="baseLayout">
         <put-attribute name="title" value="Chi tiết đơn hàng" />
         <put-attribute name="content" value="/WEB-INF/jsp/orderDetail.jsp" />
+    </definition>
+    
+    <!-- Trang chi tiết đơn hàng (cho shipper) -->
+    <definition name="shipperOrderDetail" extends="baseLayout">
+        <put-attribute name="title" value="Chi tiết đơn hàng" />
+        <put-attribute name="content" value="/WEB-INF/jsp/shipperOrderDetail.jsp" />
     </definition>
     
     <!-- Trang đặt đơn -->
@@ -120,12 +126,6 @@
     <definition name="incomeStat" extends="adminBaseLayout">
         <put-attribute name="title" value="Thống kê doanh thu"/>
         <put-attribute name="content" value="/WEB-INF/jsp/incomeStat.jsp"/>
-    </definition>
-    
-    <!-- Trang báo cáo/thống kê tần suất giao hàng -->
-    <definition name="frequencyStat" extends="adminBaseLayout">
-        <put-attribute name="title" value="Thống kê tần suất giao hàng"/>
-        <put-attribute name="content" value="/WEB-INF/jsp/frequencyStat.jsp"/>
     </definition>
     
 </tiles-definitions>

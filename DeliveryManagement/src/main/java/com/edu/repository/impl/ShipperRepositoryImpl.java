@@ -196,7 +196,7 @@ public class ShipperRepositoryImpl implements ShipperRepository {
     @Override
     public int countShipper() {
         Session session = this.sessionFactory.getObject().getCurrentSession();
-        Query query = session.createQuery("Select COUNT(*) From Order");
+        Query query = session.createQuery("Select COUNT(*) From Shipper");
          
         return Integer.parseInt(query.getSingleResult().toString());
     }
@@ -225,7 +225,7 @@ public class ShipperRepositoryImpl implements ShipperRepository {
         if (sort.equals("rate")) {
             query = query.orderBy(builder.asc(rootShipper.get("avgRating")));
         } else {
-            query = query.orderBy(builder.asc(rootShipper.join("user").get("firstName")));
+            query = query.orderBy(builder.asc(rootShipper.get("shipperId")));
         }
 
         query = query.multiselect(

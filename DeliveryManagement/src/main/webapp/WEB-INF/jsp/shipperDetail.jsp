@@ -1,15 +1,8 @@
-<%-- 
-    Document   : shipperProfile
-    Created on : Dec 20, 2021, 8:09:23 PM
-    Author     : beanp
---%>
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-
-<!-- Profile -->
+<!-- Profile shipper -->
 <section id="profile">
     <div class="container my-5">
         <div class="row">

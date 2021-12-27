@@ -42,6 +42,13 @@
                         <p><span>Giá trị đơn </span>: ${order.price}</p>
                     </div>
                 </c:if>
+                <c:if test="${order.shipperId != null}" >
+                    <div class="bio-row col-6">
+                        <p><span>Shipper nhận đơn </span>: 
+                            <a href="<c:url value='/shipper-detail/${order.shipperId.user.id}' />">${order.shipperId.user.firstName} ${order.shipperId.user.lastName}</a>
+                        </p>
+                    </div>
+                </c:if>
                 <div class="bio-row col-12">
                     <p><span>Mô tả </span>: ${order.description}</p>
                 </div>
@@ -113,5 +120,36 @@
             </div>
         </c:if>
 
+        <c:if test="${order.status == 'SUCCESS'}">
+            <c:if test="${order.rateStar == null}">
+                <div class="d-flex justify-content-center">
+                    <div class="w-50 card d-flex justify-content-center">
+                        <div class="card-body">
+                            <h3 class="card-title p-3 text-center">Đánh giá đơn hàng</h3>
+                            <div class="row card-text">
+                                <span class="col-2 d-flex justify-content-center">1 <i class="fas fa-star text-warning"></i></span>
+                                <input name="rating" type="range" class="form-range col" min="1" max="5" step="1" id="rating">
+                                <span class="col-2 d-flex justify-content-center">5 <i class="fas fa-star text-warning"></i></span>
+                            </div>
+                            <button onclick="rate(${order.id})" class="btn btn-primary m-4 w-100">Gửi đánh giá</button>
+                        </div>
+                    </div>
+                </div>
+            </c:if>
+            <c:if test="${order.rateStar != null}">
+                <div class="d-flex justify-content-center">
+                    <div class="w-50 card d-flex justify-content-center">
+                        <div class="card-body">
+                            <h3 class="card-title p-3 text-center">Bạn đã đánh giá đơn hàng này</h3>
+                            <div class="text-center fs-1">
+                                <c:forEach begin="1" end="${order.rateStar}">
+                                    <span class="fw-bold"><i class="fas fa-star text-warning"></i></span>
+                                </c:forEach>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </c:if>
+        </c:if>
     </div>
 </section>

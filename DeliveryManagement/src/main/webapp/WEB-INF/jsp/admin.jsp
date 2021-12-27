@@ -12,10 +12,7 @@
             <a href="<c:url value='/admin/order'/>" class="btn btn-outline-primary btn-lg">Xem danh sách đơn hàng</a>
         </li>
         <li class="list-group-item">
-            <a href="<c:url value='/admin/income-stat'/>" class="btn btn-outline-primary btn-lg">Thống kê về đơn hàng</a>
-        </li>
-        <li class="list-group-item">
-            <a href="<c:url value='/admin/frequency-stat'/>" class="btn btn-outline-primary btn-lg">Thống kê về tần suất giao hàng</a>
+            <a href="<c:url value='/admin/income-stat'/>" class="btn btn-outline-primary btn-lg">Thống kê</a>
         </li>
     </ul>
 </div>
