@@ -61,16 +61,9 @@ public class OrderController {
         
         User current = (User) session.getAttribute("currentUser");      
         
-        if (current.getUserRole().equals(User.ROLE_CUSTOMER)) {
             order.setStatus("SHIPPING");
             order.setCreatedDate(this.orderService.getOrderById(id).getCreatedDate());
-        }
         
-        if (current.getUserRole().equals(User.ROLE_SHIPPER)) {
-            order.setCreatedDate(this.orderService.getOrderById(id).getCreatedDate());
-            order.setCompletedDate(new Date());
-        }
-        System.out.println(order.getCreatedDate());
         if (this.orderService.updateOrder(order) == true) {
             System.out.println("Thanh cong");
         }
