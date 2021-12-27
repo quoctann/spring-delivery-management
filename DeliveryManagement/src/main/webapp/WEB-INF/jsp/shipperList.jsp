@@ -32,142 +32,26 @@
             </div>
             <hr />
             <div class="list-content row">
-                <!-- list item -->
-                <div class="list-item col-3">
+                <c:forEach items="${shippers}" var="s">
+                    <div class="list-item col-3">
                     <div class="card">
-                        <img src="/image/Suar.png" class="card-img-top w-70" alt="...">
+                        <c:if test="${s[6] != null}">
+                            <img src="<c:url value="${s[6]}" />" class="card-img-top w-70" alt="...">
+                        </c:if>
+                         <c:if test="${s[6] == null}">
+                            <img src="<c:url value="/images/default.png" />" class="card-img-top w-70" alt="...">
+                        </c:if>
                         <div class="card-body text-center bg-light">
-                            <h5 class="card-title">Tôi là ?</h5>
+                            <h5 class="card-title">${s[2]}</h5>
                             <div class="rate">
-                                <i class="fa fa-star active"></i>
-                                <i class="fa fa-star active"></i>
-                                <i class="fa fa-star active"></i>
-                                <i class="fa fa-star-half-alt active"></i>
+                                ${s[9]}
+                                <i class="fa fa-star active"></i>                              
                             </div>
-                            <a href="#" class="card-link btn btn-readmore">Chi tiết</a>
+                                <a href="<c:url value="/shipper-detail/${s[0]}" />" class="card-link btn btn-readmore">Chi tiết</a>
                         </div>
                     </div>
                 </div>
-                <!-- End List item block -->
-                <!-- list item -->
-                <div class="list-item col-3">
-                    <div class="card">
-                        <img src="/image/Suar.png" class="card-img-top w-70" alt="...">
-                        <div class="card-body text-center bg-light">
-                            <h5 class="card-title">Tôi là ?</h5>
-                            <div class="rate">
-                                <i class="fa fa-star active"></i>
-                                <i class="fa fa-star active"></i>
-                                <i class="fa fa-star active"></i>
-                                <i class="fa fa-star-half-alt active"></i>
-                            </div>
-                            <a href="#" class="card-link btn btn-readmore">Chi tiết</a>
-                        </div>
-                    </div>
-                </div>
-                <!-- End List item block -->
-                <!-- list item -->
-                <div class="list-item col-3">
-                    <div class="card">
-                        <img src="/image/Suar.png" class="card-img-top w-70" alt="...">
-                        <div class="card-body text-center bg-light">
-                            <h5 class="card-title">Tôi là ?</h5>
-                            <div class="rate">
-                                <i class="fa fa-star active"></i>
-                                <i class="fa fa-star active"></i>
-                                <i class="fa fa-star active"></i>
-                                <i class="fa fa-star-half-alt active"></i>
-                            </div>
-                            <a href="#" class="card-link btn btn-readmore">Chi tiết</a>
-                        </div>
-                    </div>
-                </div>
-                <!-- End List item block -->
-                <!-- list item -->
-                <div class="list-item col-3">
-                    <div class="card">
-                        <img src="/image/Suar.png" class="card-img-top w-70" alt="...">
-                        <div class="card-body text-center bg-light">
-                            <h5 class="card-title">Tôi là ?</h5>
-                            <div class="rate">
-                                <i class="fa fa-star active"></i>
-                                <i class="fa fa-star active"></i>
-                                <i class="fa fa-star active"></i>
-                                <i class="fa fa-star-half-alt active"></i>
-                            </div>
-                            <a href="#" class="card-link btn btn-readmore">Chi tiết</a>
-                        </div>
-                    </div>
-                </div>
-                <!-- End List item block -->
-                <!-- list item -->
-                <div class="list-item col-3">
-                    <div class="card">
-                        <img src="/image/Suar.png" class="card-img-top w-70" alt="...">
-                        <div class="card-body text-center bg-light">
-                            <h5 class="card-title">Tôi là ?</h5>
-                            <div class="rate">
-                                <i class="fa fa-star active"></i>
-                                <i class="fa fa-star active"></i>
-                                <i class="fa fa-star active"></i>
-                                <i class="fa fa-star-half-alt active"></i>
-                            </div>
-                            <a href="#" class="card-link btn btn-readmore">Chi tiết</a>
-                        </div>
-                    </div>
-                </div>
-                <!-- End List item block -->
-                <!-- list item -->
-                <div class="list-item col-3">
-                    <div class="card">
-                        <img src="/image/Suar.png" class="card-img-top w-70" alt="...">
-                        <div class="card-body text-center bg-light">
-                            <h5 class="card-title">Tôi là ?</h5>
-                            <div class="rate">
-                                <i class="fa fa-star active"></i>
-                                <i class="fa fa-star active"></i>
-                                <i class="fa fa-star active"></i>
-                                <i class="fa fa-star-half-alt active"></i>
-                            </div>
-                            <a href="#" class="card-link btn btn-readmore">Chi tiết</a>
-                        </div>
-                    </div>
-                </div>
-                <!-- End List item block -->
-                <!-- list item -->
-                <div class="list-item col-3">
-                    <div class="card">
-                        <img src="/image/Suar.png" class="card-img-top w-70" alt="...">
-                        <div class="card-body text-center bg-light">
-                            <h5 class="card-title">Tôi là ?</h5>
-                            <div class="rate">
-                                <i class="fa fa-star active"></i>
-                                <i class="fa fa-star active"></i>
-                                <i class="fa fa-star active"></i>
-                                <i class="fa fa-star-half-alt active"></i>
-                            </div>
-                            <a href="#" class="card-link btn btn-readmore">Chi tiết</a>
-                        </div>
-                    </div>
-                </div>
-                <!-- End List item block -->
-                <!-- list item -->
-                <div class="list-item col-3">
-                    <div class="card">
-                        <img src="/image/Suar.png" class="card-img-top w-70" alt="...">
-                        <div class="card-body text-center bg-light">
-                            <h5 class="card-title">Tôi là ?</h5>
-                            <div class="rate">
-                                <i class="fa fa-star active"></i>
-                                <i class="fa fa-star active"></i>
-                                <i class="fa fa-star active"></i>
-                                <i class="fa fa-star-half-alt active"></i>
-                            </div>
-                            <a href="#" class="card-link btn btn-readmore">Chi tiết</a>
-                        </div>
-                    </div>
-                </div>
-                <!-- End List item block -->
+                </c:forEach>               
             </div>
             <div class="pagination d-flex justify-content-center my-5">
                 <nav aria-label="Page navigation">
@@ -178,9 +62,9 @@
                                 <span class="sr-only">Previous</span>
                             </a>
                         </li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                         <c:forEach begin="1" end="${Math.ceil(count/6)}" var="i">
+                            <li class="page-item"><a class="page-link" href="<c:url value="/shipperList?page=${i}" />">${i}</a></li>
+                        </c:forEach>                      
                         <li class="page-item">
                             <a class="page-link" href="#" aria-label="Next">
                                 <span aria-hidden="true">&raquo;</span>

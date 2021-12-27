@@ -35,6 +35,12 @@
         <put-attribute name="content" value="/WEB-INF/jsp/customerProfile.jsp" />
     </definition>
     
+    <!-- Trang danh sách shipper -->
+    <definition name="shipperList" extends="baseLayout">
+        <put-attribute name="title" value="Danh sách shipper" />
+        <put-attribute name="content" value="/WEB-INF/jsp/shipperList.jsp" />
+    </definition>
+    
     <!-- Trang thông tin shipper -->
     <definition name="shipperProfile" extends="baseLayout">
         <put-attribute name="title" value="Thông tin shipper" />

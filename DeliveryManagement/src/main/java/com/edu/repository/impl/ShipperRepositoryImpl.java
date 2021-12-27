@@ -200,5 +200,57 @@ public class ShipperRepositoryImpl implements ShipperRepository {
          
         return Integer.parseInt(query.getSingleResult().toString());
     }
+
+    @Override
+    public List<Object[]> getShippers(String keyword, int page, String sort) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Object[]> query = builder.createQuery(Object[].class);
+        
+        Root rootShipper = query.from(Shipper.class);
+        Root rootUser = query.from(User.class);      
+
+        // Lấy user là shipper
+        query = query.where(builder.equal(rootUser.get("id"), rootShipper.get("shipperId")));
+        
+        
+        if (keyword != null) {
+            String kw = "%" + keyword + "%";
+            Predicate p1 = builder.like(rootUser.get("firstName").as(String.class), kw);
+            Predicate p2 = builder.like(rootUser.get("lastName").as(String.class), kw); 
+            query = query.where(builder.and(p1,p2));
+        }
+        
+        if (sort.equals("rate")) {
+            query = query.orderBy(builder.asc(rootShipper.get("avgRating")));
+        } else {
+            query = query.orderBy(builder.asc(rootShipper.join("user").get("firstName")));
+        }
+
+        query = query.multiselect(
+                rootUser.get("id"),
+                rootUser.get("username"),
+                rootUser.get("firstName"),
+                rootUser.get("lastName"),
+                rootUser.get("email"),
+                rootUser.get("phone"),
+                rootUser.get("avatar"),
+                rootUser.get("joinedDate"),
+                rootUser.get("shipper").get("idCard"),
+                rootUser.get("shipper").get("avgRating"),
+                rootUser.get("active"),
+                rootUser.get("shipper").get("approvedBy").get("adminId")
+        );
+        
+        Query q = session.createQuery(query);
+        
+        int max = 6;
+        q.setMaxResults(max);
+        q.setFirstResult((page - 1) * max);
+        
+        return q.getResultList();
+        
+    }
     
 }

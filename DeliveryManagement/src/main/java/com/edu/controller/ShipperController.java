@@ -5,6 +5,8 @@ import com.edu.pojo.User;
 import com.edu.service.CustomerService;
 import com.edu.service.ShipperService;
 import com.edu.service.UserService;
+import java.util.List;
+import java.util.Map;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,9 +15,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-@RequestMapping("/shipper")
 public class ShipperController {
     
     @Autowired
@@ -24,7 +26,21 @@ public class ShipperController {
     @Autowired
     private UserService userDetailsService;
     
-    @GetMapping("/info")
+    
+    @GetMapping("/shipperList")
+    public String shipperListView(Model model, @RequestParam(required = false) Map<String, String> params) {
+        
+        int page = Integer.parseInt(params.getOrDefault("page", "1"));
+        String keyword = params.getOrDefault("search","");
+        String sort = params.getOrDefault("sort","name");
+        
+        System.out.print(this.shipperService.getShippers(keyword, page, sort));
+         model.addAttribute("count", this.shipperService.countShipper());
+        model.addAttribute("shippers", this.shipperService.getShippers(keyword, page, sort));
+        return "shipperList";
+    }
+    
+    @GetMapping("/shipper/info")
     public String info(Model model, HttpSession session) {
         User u = (User) session.getAttribute("currentUser");
         Shipper s = this.shipperService.getShipperById(u.getId());
@@ -34,7 +50,7 @@ public class ShipperController {
     }
     
     // Giống ở trên thôi, làm để reload trang không lỗi
-    @GetMapping("/user-info")
+    @GetMapping("/shipper/user-info")
     public String userInfo(Model model, HttpSession session) {
         User u = (User) session.getAttribute("currentUser");
         Shipper s = this.shipperService.getShipperById(u.getId());
@@ -44,7 +60,7 @@ public class ShipperController {
     }
     
     // Chỉ cập nhật các trường của shipper
-    @PostMapping("/info")
+    @PostMapping("/shipper/info")
     public String updateShipperInfo(Model model, HttpSession session,
             @ModelAttribute(value = "shipper") Shipper shipper) {
         
@@ -62,7 +78,7 @@ public class ShipperController {
     }
     
     // Chỉ cập nhật các trường của user là shipper (khóa ngoại)
-    @PostMapping("/user-info")
+    @PostMapping("/shipper/user-info")
     public String updateShipperUserInfo(Model model, HttpSession session,
             @ModelAttribute(value = "user") User user) {
         
@@ -87,6 +103,6 @@ public class ShipperController {
         model.addAttribute("idCard", shipper.getIdCard());
         model.addAttribute("avgRating", shipper.getAvgRating());
         
-        return "customerProfile";
+        return "shipperProfile";
     }
 }
