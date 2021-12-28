@@ -33,7 +33,7 @@ public class OrderController {
     @Autowired
     private ShipperService shipperService;
     
-     @Autowired
+    @Autowired
     private OrderService orderService;
     
     @GetMapping("/orderDetail/{id}")
@@ -57,18 +57,23 @@ public class OrderController {
     }; 
     
     @PostMapping("/orderDetail/{id}")
-    public String updateOrder(Model model, @PathVariable int id, @ModelAttribute(value = "order") @Valid Order order) {
-                
-        order.setStatus("SHIPPING");
-        order.setCreatedDate(this.orderService.getOrderById(id).getCreatedDate());
+    public String updateOrder(Model model, @PathVariable int id, @ModelAttribute(value = "order") @Valid Order order, HttpSession session) {
+        
+        User current = (User) session.getAttribute("currentUser");      
+        
+            order.setStatus("SHIPPING");
+            order.setCreatedDate(this.orderService.getOrderById(id).getCreatedDate());
         
         if (this.orderService.updateOrder(order) == true) {
             System.out.println("Thanh cong");
         }
-        
+                      
         model.addAttribute("order", order);
         
-        return "orderDetail";
+        if (current.getUserRole().equals(User.ROLE_SHIPPER))
+            return "shipperOrderDetail";
+        
+        return "redirect:/orderDetail/"+ id ;
     }
     
     @GetMapping("/createOrder")
@@ -82,12 +87,14 @@ public class OrderController {
     public String createOrderView(Model model, HttpSession session, @ModelAttribute(value = "order") @Valid Order order) {
         User u = (User) session.getAttribute("currentUser");
         order.setCustomerId(this.customerService.getCustomerById(u.getId()));
+
+       
         order.setStatus(Order.Status.PENDING);
         order.setPaymentMethod("CASH");
         order.setCreatedDate(new Date());
         
-        if (this.orderService.addOrder(order) == true) {
-            return "createOrder";
+         if (this.orderService.addOrder(order) == true) {      
+            return "redirect:/customer/info";
         } else return "404";                 
     }; 
     

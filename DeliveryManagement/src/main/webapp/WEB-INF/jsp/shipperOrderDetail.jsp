@@ -47,12 +47,74 @@
                         <p><span>Người đặt đơn: </span>: (ID: ${order.customerId.user.id}) ${order.customerId.user.firstName} ${order.customerId.user.lastName}</p>
                     </div>
                 </c:if>
+                
                 <div class="bio-row col-12">
                     <p><span>Mô tả </span>: ${order.description}</p>
                 </div>
             </div>
         </div>
 
+        <%--<c:if test="${order.status == 'SHIPPING'}" >--%>
+<!--            <div class="d-flex justify-content-center">
+                <div class="card p-4">
+                    <h3 class="pt-3 ps-3">Cập nhật trạng thái đơn hàng</h3>
+                    <div class="card-body d-flex justify-content-center">
+                        <div class="btn-group" role="group">
+                            <button type="button" data="SUCCESS" data-bs-toggle="modal" id="btnStatus" data-bs-target="#successModal" class="btn btn-readmore">Đã giao thành công</button>
+                            <button type="button" data="FAILED" data-bs-toggle="modal" id="btnStatus" data-bs-target="#failedModal" class="btn btn-readmore">Hủy đơn hàng</button>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+        <%--</c:if>--%>
+
+
+<!--            <div class="modal fade" id="successModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="confirmLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="confirmLabel">Giao hàng thành công ?</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                        <form:form method="post" action="${pick}" modelAttribute="order" enctype="multipart/form-data" >
+                            <form:input path="status" id="pickme" type="hidden" />
+                            <form:input path="price" id="${order.price}" type="hidden" />
+                            <form:input path="paymentMethod" value=" ${order.paymentMethod}" id="type" type="hidden" />
+                            <form:input path="id" value=" ${order.id}" id="type" type="hidden" />
+                            <form:input path="shipperId" value=" ${order.shipperId}" id="type" type="hidden" />                          
+                            <form:input path="receiverPhone" value="${order.receiverPhone}" id="phone" type="hidden" />
+                            <form:input path="type" value=" ${order.type}" id="type" type="hidden" />
+                            <form:input path="sentFrom" value=" ${order.sentFrom}" id="sentFrom" type="hidden" />
+                            <form:input path="sentTo" value=" ${order.sentTo}" id="sentTo" type="hidden" />                               
+                            <form:input path="description" value=" ${order.description}" id="description" type="hidden" />
+                            <button class="btn btn-submit-form" type="submit">Xác nhận</button>
+                        </form:form>
+                    </div>
+                </div>
+            </div>
+        </div>-->
+<!--        <div class="modal fade" id="failedModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="confirmLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="confirmLabel">Giao hàng thất bại ?</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">-->
+                        <%--<form:form method="post" action="${pick}" modelAttribute="order" enctype="multipart/form-data" >--%>
+                            <%--<form:input path="status" id="pickme" type="hidden" />--%>
+                            <%--<form:input path="price" id="${order.price}" type="hidden" />--%>
+                            <%--<form:input path="paymentMethod" value=" ${order.paymentMethod}" id="type" type="hidden" />--%>
+                            <%--<form:input path="id" value=" ${order.id}" id="type" type="hidden" />--%>
+                            <%--<form:input path="shipperId" value=" ${order.shipperId}" id="type" type="hidden" />--%>
+                            <%--<form:input path="receiverPhone" value="${order.receiverPhone}" id="phone" type="hidden" />--%>
+                            <%--<form:input path="type" value=" ${order.type}" id="type" type="hidden" />--%>
+                            <%--<form:input path="sentFrom" value=" ${order.sentFrom}" id="sentFrom" type="hidden" />--%>
+                            <%--<form:input path="sentTo" value=" ${order.sentTo}" id="sentTo" type="hidden" />--%>                               
+                            <%--<form:input path="description" value=" ${order.description}" id="description" type="hidden" />--%>
+                            <!--<button class="btn btn-submit-form" type="submit">Xác nhận</button>-->
+                        <%--</form:form>--%>
         <div class="d-flex justify-content-center">
             <div class="card p-4">
                 <h3 class="pt-3 ps-3">Cập nhật trạng thái đơn hàng</h3>
@@ -60,6 +122,7 @@
                     <div class="btn-group" role="group">
                         <button onclick="updateStatus(${order.id}, 'SUCCESS')" type="button" class="btn btn-outline-primary">Đã giao thành công</button>
                         <button onclick="updateStatus(${order.id}, 'FAILED')" type="button" class="btn btn-outline-primary">Hủy đơn hàng</button>
+
                     </div>
                 </div>
             </div>

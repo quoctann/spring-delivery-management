@@ -21,6 +21,11 @@
                             <a class="nav-link" href="<c:url value="/createOrder" />">Đặt đơn</a>
                         </li>
                     </c:if>
+                    <c:if test="${currentUser.userRole == 'ROLE_SHIPPER'}">
+                        <li class="nav-item">
+                            <a class="nav-link" href="<c:url value="/shipper/auction" />">Đấu giá</a>
+                        </li>
+                    </c:if>
                     <c:if test="${currentUser.userRole == 'ROLE_ADMIN'}">
                         <li class="nav-item">
                             <a class="nav-link" href="<c:url value="/admin" />">Quản lý</a>

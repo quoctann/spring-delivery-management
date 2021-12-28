@@ -9,7 +9,7 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 
-<c:url value="/auction" var="action" />
+<c:url value="/shipper/auction" var="action" />
 
 <!-- Auction -->
 <section id="auction">
@@ -29,8 +29,8 @@
             <div class="sort col-7 d-flex align-items-center justify-content-end">
                 <span>Sắp xếp theo :</span>
                 <select id="sort" class="form-select" onchange="location = this.value;" aria-label="Default select">
-                    <option value="<c:url value="/auction?sort=des"/>" >Gần đây</option>
-                    <option value="<c:url value="/auction?sort=asc"/>" >Cũ nhất</option>
+                    <option value="<c:url value="/shipper/auction?sort=des"/>" >Gần đây</option>
+                    <option value="<c:url value="/shipper/auction?sort=asc"/>" >Cũ nhất</option>
                 </select>
             </div>
         </div>
@@ -94,7 +94,7 @@
                     </li>
                     <c:forEach begin="1" end="${Math.ceil(count/10)}" var="i" >
                         <li class="page-item">
-                            <a class="page-link" href="<c:url value="/auction"/>?page=${i}">
+                            <a class="page-link" href="<c:url value="/shipper/auction"/>?page=${i}">
                                     ${i}
                                 </a>
                             </li>

@@ -3,7 +3,7 @@
 window.onload = function() {
   let preloader = document.querySelector(".preloader");
   preloader.style.display = "none";
-}
+};
 
 // Pass data to modal
 var modalInput = document.querySelector("#price");
@@ -14,8 +14,8 @@ btnAuction.forEach((btn)=> {
     console.log(btn);
     let data = btn.getAttribute("data");
     hiddenInput.value = data;
-  }) 
-})
+  }) ;
+});
 
 //// Pass data to modal!!!!!
 var btnPick = document.querySelectorAll("#btnPickme");
@@ -28,9 +28,19 @@ btnPick.forEach((btn)=> {
     let pric = btn.getAttribute("dataP");
     pickInput.value = data;
     price.value = pric;
-  })
-  })
+  });
+  });
 
+//// Pass data to modal!!!!!
+var btnStatus = document.querySelectorAll("#btnStatus");
+console.log(pickInput);
+btnStatus.forEach((btn)=> {
+  btn.addEventListener("click", () => {
+      console.log(pickInput);
+    let data = btn.getAttribute("data");
+    pickInput.value = data;
+  });
+  });
 
 function showAvatar() {
   var file = document.getElementById("file").files[0];
