@@ -1,4 +1,4 @@
-package com.edu.repository.impl;
+package com.edu.service.impl;
 
 import com.edu.repository.StatisticRepository;
 import com.edu.service.StatisticService;

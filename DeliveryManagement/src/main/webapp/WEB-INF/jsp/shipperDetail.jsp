@@ -16,10 +16,9 @@
                         <h2>${userAsShipperInfo.firstName}</h2>
                         <p>Điểm đánh giá: ${shipperInfo.avgRating}</p>
                         <div class="rate">
-                            <i class="fa fa-star active"></i>
-                            <i class="fa fa-star active"></i>
-                            <i class="fa fa-star active"></i>
-                            <i class="fa fa-star-half-alt active"></i>
+                            <c:forEach begin="1" end="${shipperInfo.avgRating}">
+                                <i class="fa fa-star active"></i>
+                            </c:forEach>
                         </div>
                         <!--<p>Số điện thoại: <a href="tel:+0364552651">0364552***</a></p>-->
                     </div>

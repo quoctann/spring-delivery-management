@@ -88,7 +88,7 @@
                                         </c:if>                           
                                     <td>${s.getUser().getFirstName()}</td>
                                     <td>${s.getpriceByOrderId(order.id)}VND</td>
-                                    <td>${s.getAvgRating()} <i class="fa fa-star"></i> <span><a href="#">Thông tin Shipper</a></span></td>
+                                    <td>${s.getAvgRating()} <i class="fa fa-star"></i> <span><a href="<c:url value='/shipper-detail/${s.getUser().id}' />">Thông tin Shipper</a></span></td>
                                     <td><button id="btnPickme" type="button" data="${s.shipperId}" dataP="${s.getpriceByOrderId(order.id)}" data-bs-toggle="modal" data-bs-target="#confirm" class="btn btn-readmore btn-pick">Chọn shipper này</button></td>      
                                 </tr>
                             </c:forEach>                       

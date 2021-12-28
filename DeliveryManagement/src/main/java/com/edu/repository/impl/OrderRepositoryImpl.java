@@ -121,7 +121,7 @@ public class OrderRepositoryImpl implements OrderRepository {
     @Override
     public Boolean addOrder(Order order) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
-        
+        order.setPaymentMethod("CASH");
         try {
             session.save(order);
             return true;
@@ -140,19 +140,19 @@ public class OrderRepositoryImpl implements OrderRepository {
         CriteriaBuilder builder = session.getCriteriaBuilder();       
         CriteriaQuery<Order> query = builder.createQuery(Order.class);
         Root rootOrder = query.from(Order.class);
-        Root rootCustomer = query.from(Customer.class);
-        Root rootShipper = query.from(Shipper.class);
+//        Root rootCustomer = query.from(Customer.class);
+//        Root rootShipper = query.from(Shipper.class);
         
         query = query.select(rootOrder);
         
         if (role != null) {
             switch (role) {
                 case User.ROLE_CUSTOMER:
-                    query = query.where(builder.equal(rootOrder.get("customerId"), rootCustomer.get("customerId")));
+                    query = query.where(builder.equal(rootOrder.get("customerId"), userId));
                     break;
                     
                 case User.ROLE_SHIPPER:
-                    query = query.where(builder.equal(rootOrder.get("shipperId"), rootShipper.get("shipperId")));
+                    query = query.where(builder.equal(rootOrder.get("shipperId"), userId));
                     break;
                     
                 default:
@@ -173,10 +173,19 @@ public class OrderRepositoryImpl implements OrderRepository {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         
         Order order = session.get(Order.class, orderId);
+        Shipper shipper = session.get(Shipper.class, order.getShipperId().getShipperId());
+        Long totalOrders = (Long) session.createQuery("SELECT count(*) from Order o where o.status='SUCCESS' and o.shipperId=" + shipper.getShipperId()).getSingleResult();
+        Long totalStars = (Long) session.createQuery("SELECT sum(rateStar) from Order o where o.status='SUCCESS' and o.shipperId=" + shipper.getShipperId()).getSingleResult();
+        if (totalOrders == null) totalOrders = 0l;
+        if (totalStars == null) totalStars = 0l; 
+        Long newAvg = (totalStars + value) / totalOrders++;
+        
+        shipper.setAvgRating((float) newAvg);
         order.setRateStar(value);
         
         try {
-            session.update(order);
+            session.saveOrUpdate(order);
+            session.saveOrUpdate(shipper);
             return true;
         } catch (HibernateException ex) {
             ex.printStackTrace();
@@ -190,9 +199,9 @@ public class OrderRepositoryImpl implements OrderRepository {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         Order order = session.get(Order.class, orderId);
         order.setStatus(status);
-        
+                
         try {
-            session.update(order);
+            session.saveOrUpdate(order);
             return true;
         } catch (HibernateException ex) {
             ex.printStackTrace();

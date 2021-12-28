@@ -115,17 +115,48 @@
                             <%--<form:input path="description" value=" ${order.description}" id="description" type="hidden" />--%>
                             <!--<button class="btn btn-submit-form" type="submit">Xác nhận</button>-->
                         <%--</form:form>--%>
-        <div class="d-flex justify-content-center">
-            <div class="card p-4">
-                <h3 class="pt-3 ps-3">Cập nhật trạng thái đơn hàng</h3>
-                <div class="card-body d-flex justify-content-center">
-                    <div class="btn-group" role="group">
-                        <button onclick="updateStatus(${order.id}, 'SUCCESS')" type="button" class="btn btn-outline-primary">Đã giao thành công</button>
-                        <button onclick="updateStatus(${order.id}, 'FAILED')" type="button" class="btn btn-outline-primary">Hủy đơn hàng</button>
-
+                        
+                        <c:choose>
+                            <c:when test="${order.status == 'SHIPPING'}">
+                                <div class="d-flex justify-content-center">
+                                    <div class="card p-4">
+                                        <h3 class="pt-3 ps-3">Cập nhật trạng thái đơn hàng</h3>
+                                        <div class="card-body d-flex justify-content-center">
+                                            <div class="btn-group" role="group">
+                                                <button onclick="updateStatus(${order.id}, 'SUCCESS')" type="button" class="btn btn-outline-primary">Đã giao thành công</button>
+                                                <button onclick="updateStatus(${order.id}, 'FAILED')" type="button" class="btn btn-outline-primary">Hủy đơn hàng</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </c:when>
+                            <c:when test="${order.status == 'FAILED'}">
+                                <div class="alert alert-danger">
+                                    Đơn hàng đã hủy
+                                </div>
+                            </c:when>
+                            <c:when test="${order.status == 'PENDING'}">
+                                <div class="alert alert-warning">
+                                    Đơn hàng đang chờ đấu giá
+                                </div>
+                            </c:when>
+                            <c:when test="${order.status == 'SUCCESS'}">
+                                <div class="alert alert-success">
+                                    Đơn hàng đã giao thành công
+                                </div>
+                            </c:when>
+                        </c:choose>                
+                         
+<!--            <div class="d-flex justify-content-center">
+                <div class="card p-4">
+                    <h3 class="pt-3 ps-3">Cập nhật trạng thái đơn hàng</h3>
+                    <div class="card-body d-flex justify-content-center">
+                        <div class="btn-group" role="group">
+                            <button onclick="updateStatus(${order.id}, 'SUCCESS')" type="button" class="btn btn-outline-primary">Đã giao thành công</button>
+                            <button onclick="updateStatus(${order.id}, 'FAILED')" type="button" class="btn btn-outline-primary">Hủy đơn hàng</button>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
+            </div>-->
     </div>
 </section>

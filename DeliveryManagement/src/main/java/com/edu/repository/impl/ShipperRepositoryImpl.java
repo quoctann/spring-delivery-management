@@ -213,21 +213,20 @@ public class ShipperRepositoryImpl implements ShipperRepository {
 
         // Lấy user là shipper
         query = query.where(builder.equal(rootUser.get("id"), rootShipper.get("shipperId")));
-        
-        
+                
         if (keyword != null) {
             String kw = "%" + keyword + "%";
             Predicate p1 = builder.like(rootUser.get("firstName").as(String.class), kw);
             Predicate p2 = builder.like(rootUser.get("lastName").as(String.class), kw); 
             query = query.where(builder.and(p1,p2));
         }
-        
+               
         if (sort.equals("rate")) {
             query = query.orderBy(builder.asc(rootShipper.get("avgRating")));
         } else {
             query = query.orderBy(builder.asc(rootShipper.get("shipperId")));
         }
-
+              
         query = query.multiselect(
                 rootUser.get("id"),
                 rootUser.get("username"),

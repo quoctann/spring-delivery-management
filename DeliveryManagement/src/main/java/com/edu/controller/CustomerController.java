@@ -38,6 +38,7 @@ public class CustomerController {
         
         User u = (User) session.getAttribute("currentUser");
         Customer c = this.customerService.getCustomerById(u.getId());
+        System.out.println(u.getUserRole() + "from controller");
         
         model.addAttribute("address", c.getAddress());
         model.addAttribute("orders", this.orderService.getUserOrders(u.getId(), u.getUserRole(), pageNum));

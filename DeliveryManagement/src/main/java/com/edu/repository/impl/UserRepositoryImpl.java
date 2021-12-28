@@ -66,6 +66,7 @@ public class UserRepositoryImpl implements UserRepository {
                     session.save(user);
                     Shipper shipper = new Shipper();
                     shipper.setShipperId(user.getId());
+                    shipper.setAvgRating((float) 0);
                     session.save(shipper);
                     return true;
                     

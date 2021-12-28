@@ -30,8 +30,8 @@
             </c:if>
 
             <div class="form-input text-center row justify-content-center">
-                <input class="input input-firstName" required type="text" name="firstName" id="firstName" placeholder="Họ và tên đệm">
-                <input class="input input-lastName" required type="text" name="lastName" id="lastName" placeholder="Tên">
+                <input class="input input-firstName" required type="text" name="lastName" id="firstName" placeholder="Họ và tên đệm">
+                <input class="input input-lastName" required type="text" name="firstName" id="lastName" placeholder="Tên">
                 <br/>
             </div>
             <div class="form-input text-center">
