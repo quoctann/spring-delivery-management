@@ -5,6 +5,7 @@ import com.edu.pojo.Order;
 import com.edu.pojo.Shipper;
 import com.edu.pojo.User;
 import com.edu.repository.OrderRepository;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -108,7 +109,7 @@ public class OrderRepositoryImpl implements OrderRepository {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         
         try {
-            session.update(order);
+            session.saveOrUpdate(order);
             return true;
         }
         catch (Exception ex) {
@@ -199,7 +200,9 @@ public class OrderRepositoryImpl implements OrderRepository {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         Order order = session.get(Order.class, orderId);
         order.setStatus(status);
-                
+        order.setCompletedDate(new Date());
+        order.setType(order.getType().trim());
+                       
         try {
             session.saveOrUpdate(order);
             return true;

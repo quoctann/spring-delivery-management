@@ -63,6 +63,7 @@ public class UserRepositoryImpl implements UserRepository {
                     return true;
                     
                 case User.ROLE_SHIPPER:
+                    user.setActive((short) 0);
                     session.save(user);
                     Shipper shipper = new Shipper();
                     shipper.setShipperId(user.getId());
