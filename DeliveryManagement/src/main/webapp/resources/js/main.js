@@ -202,6 +202,8 @@ function rate(orderId) {
     });
 }
 
+
+// Shipper cập nhật trạng thái đơn hàng
 function updateStatus(orderId, status) {
     
     if (orderId === null || status === null) {
@@ -221,6 +223,6 @@ function updateStatus(orderId, status) {
         } else if (data === 500)
             alert("Lỗi server!")
         else
-            alert("Lỗi không xác định, mã lỗi: ", data);
+            alert("Lỗi không xác định, mã lỗi: " + data);
     });
 }
